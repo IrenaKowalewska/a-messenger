@@ -1,0 +1,58 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 96%;
+}
+
+.wrapper {
+  max-width: 300px;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 1px solid #94a2aa;
+  border-radius: 5px;
+}
+
+.title {
+  color: #d40000;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 50px;
+  span {
+    display: block;
+  }
+}
+
+.subtitle {
+  color: #94a2aa;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 208px;
+  width: 100%;
+  align-items: center;
+  padding: 2px;
+  background: #d40000;
+  color: white;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+.btn-icon {
+  width: 41px;
+  height: 41px;
+  background: white;
+  background-image: url('~src/assets/images/google-sso-btn.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  border-radius: 5px;
+}
