@@ -1,0 +1,18 @@
+:host {
+  display: block;
+  height: 95%;
+}
+
+.chat-box {
+  width: 450px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.messages-box {
+  height: 92%;
+  overflow-y: auto;
+}

@@ -1,0 +1,10 @@
+<li [ngClass]="{ 'chat-right': isUser, 'chat-left': !isUser }">
+  <div class="chat-avatar">
+    <img [src]="message.authorPhoto" (error)="errorHandler($event)">
+    <div class="chat-name">{{ message?.author }}</div>
+    <div class="chat-hour">{{ message?.timestamp | date:'short' }}</div>
+  </div>
+  <div class="chat-text">
+    {{ message?.message }}
+  </div>
+</li>
