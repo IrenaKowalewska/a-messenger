@@ -1,0 +1,28 @@
+<div class="chat-box" *ngIf="messages">
+  <ul class="messages-box" #scrollframe>
+    <app-chat-message
+      *ngFor="let message of messages"
+      [message]="message"
+      [isUser]="user.uid === message.authorId"
+      #chatItem
+    ></app-chat-message>
+  </ul>
+  <div class="send-wrapper">
+    <input
+      class="input"
+      type="text"
+      [(ngModel)]="messageText"
+      #input
+      placeholder="Type your message here...">
+    <emoji-mart
+      class="emoji-mart-block"
+      *ngIf="showEmojiPicker"
+      set="apple"
+      (emojiClick)="addEmoji($event)"
+    ></emoji-mart>
+    <button class="open-emoji-button" (click)="showEmojiPicker = !showEmojiPicker">😀</button>
+    <button class="send-button" (click)="sendMessage()">
+      <img src="/assets/images/Vector.png" alt="send">
+    </button>
+  </div>
+</div>

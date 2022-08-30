@@ -1,15 +1,4 @@
-<div class="chat-box" *ngIf="messages">
-  <ul class="messages-box" #scrollframe>
-    <app-chat-message
-      *ngFor="let message of messages"
-      [message]="message"
-      [isUser]="user.uid === message.authorId"
-      #chatItem
-    ></app-chat-message>
-  </ul>
-  <div>
-    <input type="text" [(ngModel)]="messageText">
-    <button (click)="sendMessage()">Send</button>
-  </div>
-</div>
+<ul class="chats">
+  <li><a [routerLink]="['chat', '1']">Chat 1</a></li>
+</ul>
 

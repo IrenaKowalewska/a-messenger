@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  height: 60px;
+  border-bottom: 1px solid gray;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 75px;
+  border-radius: 10%;
+  .logo-image {
+    width: 100%;
+    border-radius: 10%;
+  }
+}
