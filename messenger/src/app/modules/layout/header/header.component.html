@@ -1,0 +1,7 @@
+<header class="header-content">
+  <div class="logo">Chatty</div>
+  <div>
+    <div>{{user?.displayName}}</div>
+    <button *ngIf="user?.displayName" (click)="logOut()">Log out</button>
+  </div>
+</header>

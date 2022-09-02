@@ -1,0 +1,34 @@
+{
+  "name": "a-messenger",
+  "version": "1.0.0",
+  "description": "Chat messenger",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "server": "nodemon index",
+    "client-install": "npm install --prefix messenger",
+    "client": "npm run start --prefix messenger",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrenaKowalewska/a-messenger.git"
+  },
+  "author": "Irena Kovalewska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IrenaKowalewska/a-messenger/issues"
+  },
+  "homepage": "https://github.com/IrenaKowalewska/a-messenger#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
+    "websocket": "^1.0.34",
+    "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19"
+  }
+}

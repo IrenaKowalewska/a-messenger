@@ -1,0 +1,48 @@
+@import 'src/styles/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.add-chat-button {
+  color: $white;
+  padding: 5px;
+  font-size: 18px;
+}
+
+.add-chat-button:disabled {
+  cursor: no-drop;
+  background: $border-color;
+}
+
+.dialog-header {
+  position: relative;
+}
+
+.close-icon {
+  background-color: transparent;
+  width: fit-content;
+  position: absolute;
+  right: 0;
+  color: $main-text-color;
+}
+
+.mat-dialog-title {
+  text-align: center;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: none;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: $border-color !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: $border-color !important;
+}
