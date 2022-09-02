@@ -71,15 +71,15 @@ export class ChatService {
     this.db.collection(`chats/${chatId}/messages`).add(newMessage);
   }
 
-  public sendPrivateMessage(messageText: string, user: User | null, selectedChat: Chat) {
+  public sendPrivateMessage(messageText: string, user: User | null, selectedChat: Chat | null) {
     const chatId = this.privateChatId.getValue();
     const newMessage = this.createMessage(messageText, user);
-    if(selectedChat.authorId === selectedChat?.selectedUserId) {
-      this.db.collection(`private-chats/${selectedChat.authorId}/chats/${chatId}/messages`).add(newMessage);
+    if(selectedChat?.authorId === selectedChat?.selectedUserId) {
+      this.db.collection(`private-chats/${selectedChat?.authorId}/chats/${chatId}/messages`).add(newMessage);
       return;
     }
-    this.db.collection(`private-chats/${selectedChat.selectedUserId}/chats/${chatId}/messages`).add(newMessage);
-    this.db.collection(`private-chats/${selectedChat.authorId}/chats/${chatId}/messages`).add(newMessage);
+    this.db.collection(`private-chats/${selectedChat?.selectedUserId}/chats/${chatId}/messages`).add(newMessage);
+    this.db.collection(`private-chats/${selectedChat?.authorId}/chats/${chatId}/messages`).add(newMessage);
 
   }
 

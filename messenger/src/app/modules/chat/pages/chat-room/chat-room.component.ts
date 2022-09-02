@@ -30,7 +30,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
   private isNearBottom = true;
   public showEmojiPicker = false;
   private onDestroy = new Subject<boolean>();
-  public selectedChat!: Chat;
+  public selectedChat!: Chat | null;
   public isPrivateChat = false;
 
   constructor(
