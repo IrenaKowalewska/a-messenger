@@ -1,0 +1,17 @@
+<ul class="chats-wrapper">
+    <ng-container *ngIf="chats.length; else emptyChatList">
+      <app-chat-list-item
+        *ngFor="let chat of chats"
+        [chat]="chat"
+        [link]="link"
+        [isUser]="userId === chat.authorId"
+        (onDeleteChat)="deleteChat($event)"
+      ></app-chat-list-item>
+    </ng-container>
+    <ng-template #emptyChatList>
+      <ng-container [ngSwitch]="isPrivateList">
+        <li *ngSwitchCase="true" class="chats-item private">Select user to start chat</li>
+        <li *ngSwitchDefault (click)="this.onOpenDialog.emit();" class="chats-item">Add first group chat</li>
+      </ng-container>
+    </ng-template>
+</ul>

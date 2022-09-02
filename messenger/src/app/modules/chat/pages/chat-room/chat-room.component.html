@@ -1,0 +1,52 @@
+<div class="chat-box">
+  <div class="chat-info">
+    <a [routerLink]="['/chats']" matTooltip="Go back">
+      <mat-icon class="go-back-icon">arrow_back</mat-icon>
+    </a>
+    <h2 class="chat-title">{{selectedChat.name}}</h2>
+  </div>
+  <ul class="messages-box" #scrollframe>
+    <ng-container *ngIf="messages; else spinner">
+      <ng-container *ngIf="messages.length; else helloBlock">
+        <app-chat-message
+          *ngFor="let message of messages"
+          [message]="message"
+          [isUser]="user?.userId === message.authorId"
+          #chatItem
+        ></app-chat-message>
+      </ng-container>
+      <ng-template #helloBlock>
+        <div class="welcome-wrapper">
+          <h2 class="welcome-title">Welcome to chat: {{selectedChat.name}}</h2>
+          <div class="welcome-img">
+            <img class="welcome-img" src="/assets/images/welcom.png" alt="Welcome to chat">
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-template #spinner>
+      <div class="chat-box">
+        <app-spinner></app-spinner>
+      </div>
+    </ng-template>
+  </ul>
+
+  <div class="send-wrapper">
+    <input
+      class="input"
+      type="text"
+      [(ngModel)]="messageText"
+      #input
+      placeholder="Type your message here...">
+    <emoji-mart
+      class="emoji-mart-block"
+      *ngIf="showEmojiPicker"
+      set="apple"
+      (emojiClick)="addEmoji($event)"
+    ></emoji-mart>
+    <button class="open-emoji-button" (click)="showEmojiPicker = !showEmojiPicker">😀</button>
+    <button class="send-button" (click)="sendMessage()">
+      <img src="assets/images/Vector.png" alt="send">
+    </button>
+  </div>
+</div>

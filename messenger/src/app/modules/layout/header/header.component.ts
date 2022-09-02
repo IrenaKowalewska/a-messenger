@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../../core/services/auth.service";
 import {Subject, takeUntil} from "rxjs";
+import {ChatService} from "../../../core/services/chat.service";
+import {UsersService} from "../../../core/services/users.service";
 
 @Component({
   selector: 'app-header',
@@ -11,10 +13,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public user!: any;
   public onDestroy$ = new Subject<boolean>();
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private userService: UsersService) {}
 
   ngOnInit(): void {
-    this.authService.userInfo$
+    this.userService.userInfo$
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(user => this.user = user);
   }

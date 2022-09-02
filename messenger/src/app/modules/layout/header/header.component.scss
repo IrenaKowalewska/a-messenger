@@ -1,7 +1,16 @@
+@import 'src/styles/variables';
+
 :host {
-  display: block;
+  display: flex;
   height: 60px;
-  border-bottom: 1px solid gray;
+  background: $header-bg;
+}
+
+.logo {
+  font-family: 'Qwitcher Grypen', cursive;
+  color: $body-bg;
+  font-size: 40px;
+  font-weight: 700;
 }
 
 .header-content {
@@ -10,13 +19,6 @@
   align-items: center;
   width: 90%;
   margin: 0 auto;
+  color: $white;
 }
 
-.logo {
-  width: 75px;
-  border-radius: 10%;
-  .logo-image {
-    width: 100%;
-    border-radius: 10%;
-  }
-}

@@ -1,4 +1,48 @@
-<ul class="chats">
-  <li><a [routerLink]="['chat', '1']">Chat 1</a></li>
-</ul>
+<div class="chats-wrapper">
+  <div class="chats">
+    <h2 class="chat-title">Group chats</h2>
+    <app-chats-list
+      *ngIf="chatService.chats | async as chats; else spinner"
+      [chats]="chats"
+      [userId]="userService.userInfo$.getValue()?.userId"
+      [link]="'chat'"
+      [isPrivateList]="false"
+      (onDeleteChat)="deleteChat($event, chatType.Group)"
+      (onOpenDialog)="openDialog()"
+    ></app-chats-list>
 
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+
+  <div class="chats">
+    <h2 class="chat-title">Private chats</h2>
+    <app-chats-list
+      *ngIf="chatService.privateChats | async as chats; else spinner"
+      [chats]="chats"
+      [userId]="userService.userInfo$.getValue()?.userId"
+      [link]="'private-chat'"
+      [isPrivateList]="true"
+      (onDeleteChat)="deleteChat($event, chatType.Private)"
+      (onOpenDialog)="openDialog()"
+    ></app-chats-list>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</div>
+
+<div class="users">
+  <h2 class="chat-title">Users in Chatty</h2>
+ <app-chat-users-list
+   *ngIf="userService.users | async as users; else spinner"
+   [users]="users"
+   [userId]="userService.userInfo$.getValue()?.userId"
+   (onNewPrivateChat)="createNewPrivateChat($event)"
+ >
+ </app-chat-users-list>
+</div>
+
+<button class="add-new-chat-button" matTooltip="Add new group chat" (click)="openDialog()">+</button>

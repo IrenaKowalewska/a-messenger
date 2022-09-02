@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@ctrl/ngx-emoji-mart/picker';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'src/styles/variables';
 
 *,
 *::after,
@@ -33,9 +35,12 @@ html {
 }
 
 body {
+  margin: 0;
   line-height:1;
   height: 100%;
-  background: #f4f5fb;
+  background: $body-bg;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: $text-color;
 }
 
 article,aside,details,figcaption,figure,
@@ -65,38 +70,9 @@ a {
   background:transparent;
 }
 
-/* change colours to suit your needs */
-ins {
-  background-color:#ff9;
-  color:#000;
-  text-decoration:none;
-}
-
-/* change colours to suit your needs */
-mark {
-  background-color:#ff9;
-  color:#000;
-  font-style:italic;
-  font-weight:bold;
-}
-
-del {
-  text-decoration: line-through;
-}
-
 abbr[title], dfn[title] {
   border-bottom:1px dotted;
   cursor:help;
-}
-
-/* change border colour to suit your needs */
-hr {
-  display:block;
-  height:1px;
-  border:0;
-  border-top:1px solid #cccccc;
-  margin:1em 0;
-  padding:0;
 }
 
 button {
@@ -104,4 +80,12 @@ button {
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  background-color: $button-bg;
+  transition: all .4s;
+  color: $white;
+}
+
+button:hover {
+  background-color: #009688;
 }

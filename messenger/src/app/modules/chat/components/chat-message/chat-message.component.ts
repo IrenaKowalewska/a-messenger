@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ChatMessage} from "../../../../core/services/chat.service";
 
 @Component({
   selector: 'app-chat-message',
@@ -6,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./chat-message.component.scss']
 })
 export class ChatMessageComponent implements OnInit {
-  @Input() message!: any;
+  @Input() message!: ChatMessage;
   @Input() isUser!: boolean;
 
   constructor() { }

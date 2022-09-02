@@ -1,0 +1,11 @@
+<li class="chats-item">
+  <button class="delete-button"
+          *ngIf="isUser"
+          (click)="onDeleteChat.emit(chat)"
+  >
+    <mat-icon class="delete-icon">
+      delete_outline
+    </mat-icon>
+  </button>
+  <a class="chats-link" [routerLink]="[link, chat.id]">{{chat.name}}</a>
+</li>

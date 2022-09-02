@@ -1,0 +1,13 @@
+<div class="dialog-header">
+  <button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h2 mat-dialog-title>Add Chat</h2>
+</div>
+<mat-form-field class="chat-field" appearance="fill">
+  <input class="name-input" matInput placeholder="Enter chat name" [(ngModel)]="chatName">
+</mat-form-field>
+<button
+  class="add-chat-button"
+  (click)="createNewChat()" [disabled]="!chatName.length"
+>Add new Chat</button>

@@ -1,0 +1,51 @@
+@import 'src/styles/variables';
+
+.chats-item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 5px;
+  min-height: 50px;
+  border-bottom: 1px solid  $chat-item-border;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.7);
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.delete-button {
+  position: absolute;
+  display: none;
+  right: 0;
+  background: none;
+}
+
+.delete-icon {
+  color: $main-text-color;
+  &:hover {
+    color: $red;
+  }
+}
+
+.chats-item:hover {
+  .delete-button {
+    display: block;
+  }
+}
+
+.chats-link {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: $text-color;
+  width: 100%;
+  @media (max-width: $md) {
+    font-size: 16px;
+  }
+  @media (max-width: $sm) {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
