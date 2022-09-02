@@ -6,7 +6,7 @@ import {FormsModule} from "@angular/forms";
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-import { ChatRoomComponent } from './pages/chat-room/chat-room.component';
+import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import {MaterialModule} from "../../core/material/material.module";
 import { AddChatModalComponent } from './components/add-chat-modal/add-chat-modal.component';
 import {SpinnerModule} from "../../shared/spinner/spinner.module";
@@ -16,9 +16,7 @@ import { ChatUsersListComponent } from './components/chat-users-list/chat-users-
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: ChatComponent},
-  {path: 'chat/:id', component: ChatRoomComponent},
-  {path: 'private-chat/:privateId', component: ChatRoomComponent},
-
+  {path: ':id', component: ChatComponent},
 ];
 
 @NgModule({

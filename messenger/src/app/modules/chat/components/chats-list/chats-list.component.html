@@ -1,3 +1,8 @@
+<button
+  class="add-new-chat-button"
+  matTooltip="Add new group chat"
+  (click)="onOpenDialog.emit()"
+>+</button>
 <ul class="chats-wrapper">
     <ng-container *ngIf="chats.length; else emptyChatList">
       <app-chat-list-item

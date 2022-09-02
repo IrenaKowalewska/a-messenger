@@ -32,6 +32,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
   private onDestroy = new Subject<boolean>();
   public selectedChat!: Chat | null;
   public isPrivateChat = false;
+  public isSelectedChat = false;
 
   constructor(
     private authService: AuthService,
@@ -43,41 +44,23 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      if(params['privateId']) {
-        this.chatService.privateChatId.next(params['privateId']);
-        this.isPrivateChat = true;
-      } else {
+      if(params['id']) {
         this.chatService.chatId.next(params['id']);
+        this.isSelectedChat = true;
       }
     });
 
-    if(this.isPrivateChat) {
-      this.chatService.selectedPrivateChat.pipe(takeUntil(this.onDestroy))
-        .subscribe((chat: Chat | undefined) => {
-          if(!chat) {
-            this.router.navigate(['/chats']);
-            return;
-          }
-          this.selectedChat = chat;
-        });
-    } else {
-      this.chatService.selectedChat.pipe(takeUntil(this.onDestroy))
-        .subscribe((chat: Chat | undefined) => {
-          if(!chat) {
-            this.router.navigate(['/chats']);
-            return;
-          }
-          this.selectedChat = chat;
-        });
-    }
+    this.chatService.selectedChat.pipe(takeUntil(this.onDestroy))
+      .subscribe((chat: Chat | undefined) => {
+        if(!chat) {
+          this.router.navigate(['/chats']);
+          return;
+        }
+        this.selectedChat = chat;
+      });
 
-    if(this.isPrivateChat) {
-      this.chatService.selectedPrivateChatMessages.pipe(takeUntil(this.onDestroy))
-        .subscribe((messages: any) => this.messages = messages);
-    } else {
-      this.chatService.selectedChatMessages.pipe(takeUntil(this.onDestroy))
-        .subscribe((messages: any) => this.messages = messages);
-    }
+    this.chatService.selectedChatMessages.pipe(takeUntil(this.onDestroy))
+      .subscribe((messages: any) => this.messages = messages);
 
     this.userService.userInfo$.pipe(takeUntil(this.onDestroy)).subscribe((user: User | null) => {
       this.user = user;

@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {ChatService} from "../../core/services/chat.service";
 import {User, UsersService} from "../../core/services/users.service";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,11 @@ export class LoginComponent implements OnInit {
     private userService: UsersService) { }
 
   ngOnInit(): void {
+    this.authService.getUser().pipe(take(1)).subscribe(data => {
+      if(data) {
+        this.router.navigate(['/chats']);
+      }
+    })
   }
 
   public async login() {

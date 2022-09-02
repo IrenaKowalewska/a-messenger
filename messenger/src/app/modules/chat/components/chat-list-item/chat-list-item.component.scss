@@ -9,9 +9,9 @@
   min-height: 50px;
   border-bottom: 1px solid  $chat-item-border;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.7);
+  transition: all 0.4s;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -39,7 +39,7 @@
   text-decoration: none;
   font-size: 20px;
   font-weight: 700;
-  color: $text-color;
+  color: $white;
   width: 100%;
   @media (max-width: $md) {
     font-size: 16px;
