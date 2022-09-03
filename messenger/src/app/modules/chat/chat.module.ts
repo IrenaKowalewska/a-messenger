@@ -13,10 +13,11 @@ import {SpinnerModule} from "../../shared/spinner/spinner.module";
 import { ChatsListComponent } from './components/chats-list/chats-list.component';
 import { ChatListItemComponent } from './components/chat-list-item/chat-list-item.component';
 import { ChatUsersListComponent } from './components/chat-users-list/chat-users-list.component';
+import {ChatsResolver} from "./resolvers/chats.resolver";
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', component: ChatComponent},
-  {path: ':id', component: ChatComponent},
+  {path: '', pathMatch: 'full', component: ChatComponent, resolve: {chats: ChatsResolver}},
+  {path: ':id', component: ChatComponent, resolve: {chats: ChatsResolver}},
 ];
 
 @NgModule({

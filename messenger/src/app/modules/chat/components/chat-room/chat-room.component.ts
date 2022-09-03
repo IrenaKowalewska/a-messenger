@@ -1,5 +1,6 @@
 import {
-  AfterViewInit,
+  AfterContentChecked, AfterViewChecked,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
@@ -74,27 +75,17 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.scrollContainer = this.scrollFrame.nativeElement;
-    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());
-  }
-  addEmoji(event:any) {
-    const emoji: string = (event.emoji as any).native;
-    const input = this.input.nativeElement;
-    input.focus();
-
-    if (document.execCommand){
-
-      const e = new Event('input');
-      document.execCommand('insertText', false, emoji);
-      return;
-    }
-    const [start, end] = [input.selectionStart, input.selectionEnd];
-    input.setRangeText(emoji, start, end, 'end');
+    this.itemElements.changes.pipe().subscribe(_ => this.onItemElementsChanged());
   }
 
   private onItemElementsChanged(): void {
     if (this.isNearBottom) {
       this.scrollToBottom();
     }
+  }
+
+  trackBy(index: number, item: any) {
+    return item.message;
   }
 
   private scrollToBottom(): void {
@@ -109,12 +100,27 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
     const threshold = 150;
     const position = this.scrollContainer.scrollTop + this.scrollContainer.offsetHeight;
     const height = this.scrollContainer.scrollHeight;
-    console.log(position, height)
     return position > height - threshold;
   }
 
   scrolled(event: any): void {
+    console.log(event)
     this.isNearBottom = this.isUserNearBottom();
+  }
+
+  addEmoji(event:any) {
+    const emoji: string = (event.emoji as any).native;
+    const input = this.input.nativeElement;
+    input.focus();
+
+    if (document.execCommand){
+
+      const e = new Event('input');
+      document.execCommand('insertText', false, emoji);
+      return;
+    }
+    const [start, end] = [input.selectionStart, input.selectionEnd];
+    input.setRangeText(emoji, start, end, 'end');
   }
 
   public sendMessage() {

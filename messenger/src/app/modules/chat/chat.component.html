@@ -1,6 +1,6 @@
 <div class="chats">
   <app-chats-list
-    *ngIf="chatService.chats | async as chats"
+    *ngIf="chats"
     [chats]="chats"
     [userId]="userService.userInfo$.getValue()?.userId"
     [link]="'chat'"
@@ -9,9 +9,15 @@
     (onOpenDialog)="openDialog()"
   ></app-chats-list>
 </div>
-<div class="chat-room">
+<div class="chat-room" *ngIf="isSelectedChat; else welcome">
   <app-chat-room></app-chat-room>
 </div>
+
+<ng-template #welcome>
+  <div class="chat-room">
+    Please select a chat
+  </div>
+</ng-template>
 <!--<div class="users">-->
 <!--  <h2 class="chat-title">Users in Chatty</h2>-->
 <!-- <app-chat-users-list-->

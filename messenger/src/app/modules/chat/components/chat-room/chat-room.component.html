@@ -2,9 +2,9 @@
   <div class="chat-info">
     <h2 class="chat-title">{{selectedChat?.name}}</h2>
   </div>
-  <ul class="messages-box" #scrollframe>
+  <ul class="messages-box" #scrollframe (scroll)="scrolled($event)">
     <app-chat-message
-      *ngFor="let message of messages"
+      *ngFor="let message of messages; trackBy:trackBy "
       [message]="message"
       [isUser]="user?.userId === message.authorId"
       #chatItem
@@ -29,4 +29,3 @@
       <img src="../../../../../assets/images/Vector.png" alt="send">
     </button>
   </div>
-</div>
