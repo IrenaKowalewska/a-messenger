@@ -3,32 +3,12 @@
     <h2 class="chat-title">{{selectedChat?.name}}</h2>
   </div>
   <ul class="messages-box" #scrollframe>
-    <ng-container *ngIf="messages; else spinner">
-      <ng-container *ngIf="messages.length; else helloBlock">
-        <app-chat-message
-          *ngFor="let message of messages"
-          [message]="message"
-          [isUser]="user?.userId === message.authorId"
-          #chatItem
-        ></app-chat-message>
-      </ng-container>
-      <ng-template #helloBlock>
-        <div class="welcome-wrapper">
-          <h2 class="welcome-title">Welcome to chat: {{selectedChat?.name}}</h2>
-          <div class="welcome-wrapper">
-            <img class="welcome-img" src="assets/images/welcom.png" alt="Welcome to chat">
-          </div>
-        </div>
-      </ng-template>
-    </ng-container>
-    <ng-template #spinner>
-      <div class="welcome-wrapper">
-        <h2 class="welcome-title">Please select a chat</h2>
-        <div class="welcome-wrapper">
-          <img class="welcome-img" src="assets/images/welcom.png" alt="Welcome to chat">
-        </div>
-      </div>
-    </ng-template>
+    <app-chat-message
+      *ngFor="let message of messages"
+      [message]="message"
+      [isUser]="user?.userId === message.authorId"
+      #chatItem
+    ></app-chat-message>
   </ul>
 
   <div class="send-wrapper" *ngIf="isSelectedChat">

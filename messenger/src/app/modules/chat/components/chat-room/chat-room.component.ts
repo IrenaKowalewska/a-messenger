@@ -11,7 +11,7 @@ import {
 import {AuthService} from "../../../../core/services/auth.service";
 import {Chat, ChatMessage, ChatService} from "../../../../core/services/chat.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Subject, takeUntil} from "rxjs";
+import {Subject, take, takeUntil} from "rxjs";
 import {User, UsersService} from "../../../../core/services/users.service";
 
 @Component({
@@ -109,6 +109,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
     const threshold = 150;
     const position = this.scrollContainer.scrollTop + this.scrollContainer.offsetHeight;
     const height = this.scrollContainer.scrollHeight;
+    console.log(position, height)
     return position > height - threshold;
   }
 
