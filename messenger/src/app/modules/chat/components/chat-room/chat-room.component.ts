@@ -104,7 +104,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   scrolled(event: any): void {
-    console.log(event)
     this.isNearBottom = this.isUserNearBottom();
   }
 
