@@ -1,6 +1,13 @@
 <li class="chat-message" [ngClass]="{ 'chat-right': isUser, 'chat-left': !isUser }">
   <div class="chat-avatar">
-    <img class="avatar-img" [src]="message.authorPhoto" (error)="errorHandler($event)">
+    <avatar
+      [firstName]="message.author.split(' ')[0]"
+      [lastName]="message.author.split(' ')[1]"
+      [userId]="message.authorId"
+      [isCircle]="true"
+      [photo]="message.authorPhoto"
+    ></avatar>
+<!--    <img class="avatar-img" [src]="message.authorPhoto" (error)="errorHandler($event)">-->
     <div class="chat-name">{{ message.author }}</div>
     <div class="chat-hour">{{ message.timestamp | date:'short' }}</div>
   </div>

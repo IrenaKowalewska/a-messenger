@@ -9,8 +9,11 @@
 }
 
 .chat-info {
-  border: 1px solid $border-color;
+  padding: 5px;
   font-size: 20px;
+  -webkit-box-shadow: 3px 2px 5px 1px $box-shadow;
+  -moz-box-shadow: 3px 2px 5px 1px $box-shadow;
+  box-shadow: 3px 2px 5px 1px $box-shadow;
  }
 
 .go-back-icon {
@@ -104,14 +107,14 @@
 
 .messages-box::-webkit-scrollbar-track,
 .messages-box::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0,0.3);
   border-radius: 10px;
 }
 
 .messages-box::-webkit-scrollbar-thumb,
 .messages-box::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0,0.5);
 }

@@ -1,10 +1,15 @@
 @import 'src/styles/variables';
 
+:host {
+  display: block;
+  height: 100%;
+  border-right: 1px solid $chat-item-border;
+}
+
 .chats-wrapper {
   width: 100%;
   overflow-y: auto;
   height: calc(100% - 36px);
-  border-radius: 5px;
 }
 
 .chats-wrapper::-webkit-scrollbar,
@@ -14,16 +19,16 @@
 
 .chats-wrapper::-webkit-scrollbar-track,
 .chats-wrapper::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
-  -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0,0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0,0.3);
   border-radius: 10px;
 }
 
 .chats-wrapper::-webkit-scrollbar-thumb,
 .chats-wrapper::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(255,255,255,0.5);
-  -webkit-box-shadow: inset 0 0 6px rgba(255,255,255,0.5);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0,0.5);
 }
 
 .chats-item {
@@ -36,13 +41,7 @@
   border-bottom: 1px solid $border-color;
   cursor: pointer;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-  &.private {
-    cursor: no-drop;
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.7);
-    }
+    background-color: $list-item-hover;
   }
 }
 

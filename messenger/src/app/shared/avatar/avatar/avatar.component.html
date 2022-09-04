@@ -1,0 +1,14 @@
+<div
+    class="initialAvatar"
+    [ngStyle]="{ background: this.selectedColor }"
+    [class.circle]="isCircle"
+>
+    <img
+        *ngIf="photo"
+        [src]="photo"
+        alt="Picture of {{ firstName }} {{ lastName }}"
+        class="photo"
+        (error)="onImageLoadError()"
+    />
+    <span *ngIf="!photo">{{ initials }}</span>
+</div>

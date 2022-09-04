@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat.component';
 import {RouterModule, Routes} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
@@ -14,6 +14,7 @@ import { ChatsListComponent } from './components/chats-list/chats-list.component
 import { ChatListItemComponent } from './components/chat-list-item/chat-list-item.component';
 import { ChatUsersListComponent } from './components/chat-users-list/chat-users-list.component';
 import {ChatsResolver} from "./resolvers/chats.resolver";
+import {AvatarModule} from "../../shared/avatar/avatar.module";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: ChatComponent, resolve: {chats: ChatsResolver}},
@@ -30,14 +31,16 @@ const routes: Routes = [
     ChatListItemComponent,
     ChatUsersListComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        FormsModule,
-        PickerModule,
-        EmojiModule,
-        MaterialModule,
-        SpinnerModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormsModule,
+    PickerModule,
+    EmojiModule,
+    MaterialModule,
+    SpinnerModule,
+    AvatarModule,
+    ReactiveFormsModule
+  ]
 })
 export class ChatModule { }

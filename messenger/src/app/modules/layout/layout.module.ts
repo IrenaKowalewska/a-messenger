@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
+import {AvatarModule} from "../../shared/avatar/avatar.module";
 
 
 
@@ -12,7 +13,8 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent,
   ],
     imports: [
-        CommonModule
+        CommonModule,
+        AvatarModule
     ]
 })
 export class LayoutModule { }

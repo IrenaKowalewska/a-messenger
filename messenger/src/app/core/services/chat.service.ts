@@ -1,12 +1,11 @@
 import {Injectable, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, switchMap} from "rxjs";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {AuthService} from "./auth.service";
 import {User, UsersService} from "./users.service";
-import {user} from "@angular/fire/auth";
 
 export interface ChatMessage {
   message: string;
+  id: string;
   author: string;
   authorPhoto: string;
   authorId: string;
@@ -18,6 +17,7 @@ export interface Chat {
   id: string;
   authorId?: string;
   selectedUserId?: string;
+  lastMessage: string;
 }
 
 @Injectable({
@@ -68,7 +68,8 @@ export class ChatService {
   public sendMessage(messageText: string, user: User | null) {
     const chatId = this.chatId.getValue();
     const newMessage = this.createMessage(messageText, user);
-    this.db.collection(`chats/${chatId}/messages`).add(newMessage);
+    this.db.collection(`chats/${chatId}/messages`).doc(newMessage.id).set(newMessage);
+    this.db.collection(`chats`).doc(chatId).update({lastMessage: newMessage.message});
   }
 
   public sendPrivateMessage(messageText: string, user: User | null, selectedChat: Chat | null) {
@@ -88,7 +89,9 @@ export class ChatService {
     this.db.collection(`chats`).doc(id).set(
       {id: id,
         name: name,
-        authorId: this.currentUserId}
+        authorId: this.currentUserId,
+        lastMessage: ''
+      },
     );
   }
 
@@ -138,8 +141,10 @@ export class ChatService {
   }
 
   private createMessage(messageText: string, user: User | null) {
+    const id = this.db.createId();
     return {
       message: messageText,
+      id: id,
       author: user?.displayName,
       authorPhoto: user?.userPhoto,
       authorId: user?.userId,

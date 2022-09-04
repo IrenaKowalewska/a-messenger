@@ -84,15 +84,15 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  trackBy(index: number, item: any) {
-    return item.message;
+  trackBy(index: number, item: ChatMessage) {
+    return item.id;
   }
 
   private scrollToBottom(): void {
     this.scrollContainer.scroll({
       top: this.scrollContainer.scrollHeight,
       left: 0,
-      behavior: 'smooth'
+      // behavior: 'smooth'
     });
   }
 

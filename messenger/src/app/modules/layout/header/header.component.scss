@@ -22,3 +22,12 @@
   color: $white;
 }
 
+.user-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}

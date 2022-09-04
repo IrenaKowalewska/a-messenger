@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
+import {FormControl, FormGroup} from "@angular/forms";
+import {User, UsersService} from "../../../../core/services/users.service";
+
+const users = [
+  {key: 'IK', value: 'IK'},
+  {key: 'AK', value: 'AK'}
+]
 
 @Component({
   selector: 'app-add-chat-modal',

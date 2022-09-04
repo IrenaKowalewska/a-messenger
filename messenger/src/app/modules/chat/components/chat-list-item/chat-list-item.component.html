@@ -1,4 +1,11 @@
 <li class="chats-item">
+  <avatar
+    [firstName]="chat.name.split(' ')[0]"
+    [lastName]="chat.name.split(' ')[1]"
+    [userId]="chat.id"
+    [isCircle]="true"
+    [photo]="''"
+  ></avatar>
   <button class="delete-button"
           *ngIf="isUser"
           (click)="onDeleteChat.emit(chat)"
@@ -7,5 +14,8 @@
       delete_outline
     </mat-icon>
   </button>
-  <a class="chats-link" [routerLink]="['/chats', chat.id]">{{chat.name}}</a>
+  <a class="chats-link" [routerLink]="['/chats', chat.id]">
+    {{chat.name}}
+    <span class="last-message">{{chat.lastMessage}}</span>
+  </a>
 </li>
