@@ -47,6 +47,7 @@
 }
 
 .chats-link {
+  height: 21px;
   text-decoration: none;
   font-size: 20px;
   font-weight: 700;
@@ -75,4 +76,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: all 0.6s;
+}
+
+.chat-text {
+  display: flex;
+  flex-direction: column;
 }

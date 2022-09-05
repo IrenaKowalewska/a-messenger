@@ -54,9 +54,9 @@ export class ChatComponent implements OnInit {
 
     dialog.afterClosed()
       .pipe(take(1))
-      .subscribe((chatName: { chatName: string }) => {
-        if(chatName?.chatName) {
-          this.chatService.createNewChat(chatName.chatName);
+      .subscribe((chat: { chatName: string, chatImage: string }) => {
+        if(chat?.chatName) {
+          this.chatService.createNewChat(chat.chatName, chat.chatImage);
         }
       });
   }

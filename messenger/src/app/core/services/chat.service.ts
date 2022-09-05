@@ -18,6 +18,7 @@ export interface Chat {
   authorId?: string;
   selectedUserId?: string;
   lastMessage: string;
+  image: string;
 }
 
 @Injectable({
@@ -84,13 +85,15 @@ export class ChatService {
 
   }
 
-  public createNewChat(name: string) {
+  public createNewChat(name: string, image: string) {
     const id = this.db.createId();
     this.db.collection(`chats`).doc(id).set(
-      {id: id,
+      {
+        id: id,
         name: name,
         authorId: this.currentUserId,
-        lastMessage: ''
+        lastMessage: '',
+        image
       },
     );
   }

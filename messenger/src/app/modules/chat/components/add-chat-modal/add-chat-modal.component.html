@@ -4,10 +4,42 @@
   </button>
   <h2 mat-dialog-title>Add Chat</h2>
 </div>
-<mat-form-field class="chat-field" appearance="fill">
-  <input class="name-input" matInput placeholder="Enter chat name" [(ngModel)]="chatName">
-</mat-form-field>
+<form [formGroup]="form">
+  <mat-form-field class="chat-field" appearance="fill">
+    <input class="name-input" matInput placeholder="Enter chat name" formControlName="chatName">
+    <mat-error
+      class="mat-error"
+      *ngIf="form.get('chatName')?.hasError('required')"
+    >
+      Chat name is required
+    </mat-error>
+  </mat-form-field>
+
+  <div class="form__img-wrapper">
+    <ng-container *ngIf="form.get('chatImage')?.value; else formImgInput">
+      <div class="form__img">
+        <button type="button" class="delete-img-btn" (click)="removeImg()">X</button>
+        <img class="form__img-added" [src]="pref+form.get('chatImage')?.value" alt="post img">
+      </div>
+    </ng-container>
+
+    <ng-template #formImgInput>
+      <div class="form-group__cover">
+        <label class="form-group__file-label">
+          <span class="form-group__file-btn">{{addPhotoText}}</span>
+          <input
+            (change)="changeImgInput($event)"
+            class="form-group__file-input"
+            type="file"
+            name="image"
+            accept="image/*"
+          >
+        </label>
+      </div>
+    </ng-template>
+  </div>
+</form>
 <button
   class="add-chat-button"
-  (click)="createNewChat()" [disabled]="!chatName.length"
+  (click)="createNewChat()" [disabled]="form.invalid"
 >Add new Chat</button>

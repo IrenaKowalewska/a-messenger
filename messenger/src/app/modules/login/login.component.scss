@@ -6,16 +6,21 @@
   align-items: flex-end;
   justify-content: center;
   height: calc(100% - 60px);
-  padding: 15px 180px;
+  padding: 15px 160px;
   background-color: $white;
   background-image: url("~src/assets/images/chat-main.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left bottom;
+  @media (max-width: $xl) {
+    padding: 15px 90px;
+  }
+  @media (max-width: $xlg) {
+    padding: 15px 40px;
+  }
   @media (max-width: $lg) {
     justify-content: flex-start;
     align-items: center;
-    padding: 15px 40px;
   }
 }
 

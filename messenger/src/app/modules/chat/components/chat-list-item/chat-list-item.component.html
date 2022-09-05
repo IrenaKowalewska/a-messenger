@@ -4,7 +4,7 @@
     [lastName]="chat.name.split(' ')[1]"
     [userId]="chat.id"
     [isCircle]="true"
-    [photo]="''"
+    [photo]="pref + chat.image"
   ></avatar>
   <button class="delete-button"
           *ngIf="isUser"
@@ -14,8 +14,8 @@
       delete_outline
     </mat-icon>
   </button>
-  <a class="chats-link" [routerLink]="['/chats', chat.id]">
-    {{chat.name}}
+  <div class="chat-text">
+    <a class="chats-link" [routerLink]="['/chats', chat.id]">{{chat.name}}</a>
     <span class="last-message">{{chat.lastMessage}}</span>
-  </a>
+  </div>
 </li>

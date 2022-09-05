@@ -131,4 +131,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
     this.messageText = '';
   }
 
+  public onEnter() {
+    this.sendMessage();
+  }
+
 }

@@ -11,6 +11,7 @@ export class ChatListItemComponent implements OnInit {
   @Input() isUser!: boolean;
   @Input() link!: string;
   @Output() onDeleteChat = new EventEmitter<Chat>();
+  public pref = 'data:image/jpeg;base64,'
 
   constructor() { }
 

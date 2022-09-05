@@ -10,6 +10,7 @@
   color: $white;
   padding: 5px;
   font-size: 18px;
+  margin-top: 15px;
 }
 
 .add-chat-button:disabled {
@@ -37,16 +38,93 @@
   background: none;
 }
 
-::ng-deep.mat-form-field-underline {
+::ng-deep .mat-form-field-underline {
   /*change color of underline*/
   background-color: $border-color !important;
 }
 
-::ng-deep.mat-form-field-ripple {
+::ng-deep .mat-form-field-ripple {
   /*change color of underline when focused*/
   background-color: $border-color !important;
 }
 
+::ng-deep .mat-form-field-subscript-wrapper {
+  margin-top: 3px;
+}
+
 .mat-form-field {
   width: 100%;
+}
+.form-title-field {
+  margin-top: 52px;
+}
+
+.form-group__cover {
+  width: 100%;
+}
+
+.form-group__file-label {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  border: 1px dashed $border-color;
+}
+.form-group__file-label:hover {
+  cursor: pointer;
+}
+
+.form-group__file-btn {
+  position: relative;
+  color: $border-color;
+  padding-left: 29px;
+  text-align: center;
+  &:before {
+    content: "+";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.form-group__file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.form__img-wrapper {
+  position: relative;
+}
+
+.form__img {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto;
+
+  &-added {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 95%;
+  }
+}
+.delete-img-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 24%;
+  color: $white;
+  border: 1px solid $white;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  &:hover {
+    background-color: $red;
+  }
 }

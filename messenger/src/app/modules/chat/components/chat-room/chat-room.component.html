@@ -15,6 +15,7 @@
     <input
       class="input"
       type="text"
+      (keydown.enter)="onEnter()"
       [(ngModel)]="messageText"
       #input
       placeholder="Type your message here...">
