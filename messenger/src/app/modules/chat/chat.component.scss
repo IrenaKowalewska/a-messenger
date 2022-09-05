@@ -22,6 +22,7 @@
     z-index: 2;
     top: 0;
     left: -100%;
+    transition: all 0.4s;
     &.chats-open {
       left: 0;
     }

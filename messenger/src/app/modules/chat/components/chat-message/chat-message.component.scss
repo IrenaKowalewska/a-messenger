@@ -3,6 +3,7 @@
 .chat-message {
   width: 93%;
   margin: 0 auto 40px;
+  position: relative;
   @media (max-width: $md) {
     width: 87%;
   }

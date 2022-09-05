@@ -4,6 +4,9 @@
   display: block;
   height: 100%;
   border-right: 1px solid $chat-item-border;
+  @media (max-width: $smd) {
+    border-right: none;
+  }
 }
 
 .chats-wrapper {

@@ -32,8 +32,8 @@ export class ChatService {
   public chatId: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public selectedChat!: Observable<Chat | undefined>;
   public selectedChatMessages!: Observable<ChatMessage[]>;
-  public get currentUserId() {
-    return this.userService.userInfo$.getValue()?.userId;
+  public get currentUser() {
+    return this.userService.userInfo$.getValue();
   }
 
   constructor(public db: AngularFirestore, private userService: UsersService) {
@@ -52,9 +52,9 @@ export class ChatService {
     this.chats = this.db.collection<Chat>('chats').valueChanges();
   }
 
-  public sendMessage(messageText: string, user: User | null) {
+  public sendMessage(messageText: string) {
     const chatId = this.chatId.getValue();
-    const newMessage = this.createMessage(messageText, user, chatId);
+    const newMessage = this.createMessage(messageText, chatId);
     this.db.collection(`chats/${chatId}/messages`).doc(newMessage.id).set(newMessage);
     this.db.collection(`chats`).doc(chatId).update({lastMessage: newMessage.message});
   }
@@ -66,7 +66,7 @@ export class ChatService {
       {
         id: id,
         name: chatName,
-        authorId: this.currentUserId,
+        authorId: this.currentUser?.userId,
         lastMessage: '',
         image,
         chatType,
@@ -92,15 +92,15 @@ export class ChatService {
       .update({lastMessage});
   }
 
-  private createMessage(messageText: string, user: User | null, chatId: string) {
+  private createMessage(messageText: string, chatId: string) {
     const id = this.db.createId();
     return {
       message: messageText,
       id,
       chatId,
-      author: user?.displayName,
-      authorPhoto: user?.userPhoto,
-      authorId: user?.userId,
+      author: this.currentUser?.displayName,
+      authorPhoto: this.currentUser?.userPhoto,
+      authorId: this.currentUser?.userId,
       timestamp: new Date().toISOString()
     };
   }

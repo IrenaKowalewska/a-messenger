@@ -2,7 +2,7 @@ import {
   AfterContentChecked, AfterViewChecked,
   AfterViewInit, ChangeDetectorRef,
   Component,
-  ElementRef, EventEmitter,
+  ElementRef, EventEmitter, Input,
   OnDestroy,
   OnInit, Output,
   QueryList,
@@ -20,61 +20,25 @@ import {User, UsersService} from "../../../../core/services/users.service";
   templateUrl: './chat-room.component.html',
   styleUrls: ['./chat-room.component.scss']
 })
-export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ChatRoomComponent implements AfterViewInit{
+  @Input() selectedChat!: Chat | null;
+  @Input() messages!: ChatMessage[];
+  @Input() user!: User | null;
   @Output() isOpenChat = new EventEmitter<void>();
   @Output() deleteMessage = new EventEmitter<{id: string, lastMessage: string}>();
-  public messages!: ChatMessage[];
+  @Output() onSendMessage = new EventEmitter<string>();
   public messageText = '';
-  public user!: User | null;
   @ViewChild('scrollframe', {static: false}) scrollFrame!: ElementRef;
   @ViewChild('input', {static: false}) input!: ElementRef;
   @ViewChildren('chatItem') itemElements!: QueryList<any>;
   private scrollContainer: any;
   private isNearBottom = true;
   public showEmojiPicker = false;
-  private onDestroy = new Subject<boolean>();
-  public selectedChat!: Chat | null;
   public isPrivateChat = false;
   public isSelectedChat = false;
 
-  constructor(
-    private authService: AuthService,
-    private chatService: ChatService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private userService: UsersService
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      if(params['id']) {
-        this.chatService.chatId.next(params['id']);
-        this.isSelectedChat = true;
-        this.isOpenChat.emit();
-      }
-    });
-
-    this.chatService.selectedChat.pipe(takeUntil(this.onDestroy))
-      .subscribe((chat: Chat | undefined) => {
-        if(!chat) {
-          this.router.navigate(['/chats']);
-          return;
-        }
-        this.selectedChat = chat;
-      });
-
-    this.chatService.selectedChatMessages.pipe(takeUntil(this.onDestroy))
-      .subscribe((messages: any) => this.messages = messages);
-
-    this.userService.userInfo$.pipe(takeUntil(this.onDestroy)).subscribe((user: User | null) => {
-      this.user = user;
-    });
-  }
-
-  ngOnDestroy() {
-    this.onDestroy.next(true);
-    this.onDestroy.complete();
-  }
 
   ngAfterViewInit() {
     this.scrollContainer = this.scrollFrame.nativeElement;
@@ -128,7 +92,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
   public sendMessage() {
     if(!this.messageText.length) return;
     this.showEmojiPicker = false;
-    this.chatService.sendMessage(this.messageText, this.user);
+    this.onSendMessage.emit(this.messageText)
     this.messageText = '';
   }
 

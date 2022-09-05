@@ -1,6 +1,6 @@
 <li class="chat-message" [ngClass]="{ 'chat-right': isUser, 'chat-left': !isUser }">
   <button class="delete-button"
-          *ngIf="userId === message.authorId"
+          *ngIf="isUser"
           (click)="onDeleteMessage.emit(message.id)"
   >
     <mat-icon class="delete-icon">

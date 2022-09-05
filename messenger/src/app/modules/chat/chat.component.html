@@ -14,8 +14,12 @@
 </div>
 <div class="chat-room" *ngIf="isSelectedChat; else welcome">
   <app-chat-room
+    [selectedChat]="selectedChat"
+    [messages]="messages"
+    [user]="user"
     (isOpenChat)="isChatsOpen = false"
     (deleteMessage)="deleteMessage($event)"
+    (onSendMessage)="sendMessage($event)"
   ></app-chat-room>
 </div>
 

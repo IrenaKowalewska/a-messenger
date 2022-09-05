@@ -12,7 +12,6 @@ import { AddChatModalComponent } from './components/add-chat-modal/add-chat-moda
 import {SpinnerModule} from "../../shared/spinner/spinner.module";
 import { ChatsListComponent } from './components/chats-list/chats-list.component';
 import { ChatListItemComponent } from './components/chat-list-item/chat-list-item.component';
-import { ChatUsersListComponent } from './components/chat-users-list/chat-users-list.component';
 import {ChatsResolver} from "./resolvers/chats.resolver";
 import {AvatarModule} from "../../shared/avatar/avatar.module";
 import {PipesModule} from "../../shared/pipes/pipes.module";
@@ -30,7 +29,6 @@ const routes: Routes = [
     AddChatModalComponent,
     ChatsListComponent,
     ChatListItemComponent,
-    ChatUsersListComponent
   ],
   imports: [
     CommonModule,
