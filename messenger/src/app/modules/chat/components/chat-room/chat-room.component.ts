@@ -125,9 +125,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
   public sendMessage() {
     if(!this.messageText.length) return;
     this.showEmojiPicker = false;
-    this.isPrivateChat ?
-      this.chatService.sendPrivateMessage(this.messageText, this.user, this.selectedChat) :
-      this.chatService.sendMessage(this.messageText, this.user);
+    this.chatService.sendMessage(this.messageText, this.user);
     this.messageText = '';
   }
 

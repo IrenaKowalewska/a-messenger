@@ -1,22 +1,22 @@
 <button
   class="add-new-chat-button"
-  matTooltip="Add new group chat"
+  matTooltip="Add new chat"
   (click)="onOpenDialog.emit()"
 >+</button>
 <ul class="chats-wrapper">
-    <ng-container *ngIf="chats.length; else emptyChatList">
+    <ng-container *ngIf="chats.length ; else emptyChatList">
       <app-chat-list-item
-        *ngFor="let chat of chats"
+        *ngFor="let chat of chats; trackBy:trackBy"
         [chat]="chat"
         [link]="link"
-        [isUser]="userId === chat.authorId"
+        [userId]="userId"
         (onDeleteChat)="deleteChat($event)"
       ></app-chat-list-item>
     </ng-container>
     <ng-template #emptyChatList>
       <ng-container [ngSwitch]="isPrivateList">
         <li *ngSwitchCase="true" class="chats-item private">Select user to start chat</li>
-        <li *ngSwitchDefault (click)="this.onOpenDialog.emit();" class="chats-item">Add first group chat</li>
+        <li *ngSwitchDefault (click)="this.onOpenDialog.emit();" class="chats-item">Start your first chat</li>
       </ng-container>
     </ng-template>
 </ul>

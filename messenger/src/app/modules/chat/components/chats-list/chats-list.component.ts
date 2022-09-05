@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Chat} from "../../../../core/services/chat.service";
+import {Chat, ChatMessage} from "../../../../core/services/chat.service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -17,5 +17,9 @@ export class ChatsListComponent {
 
   public deleteChat(chat: Chat) {
     this.onDeleteChat.emit(chat);
+  }
+
+  trackBy(index: number, item: Chat) {
+    return item.id;
   }
 }

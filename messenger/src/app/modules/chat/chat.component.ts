@@ -46,7 +46,7 @@ export class ChatComponent implements OnInit {
 
     this.chatService.chats.subscribe((chats: Chat[]) => {
       this.chats = chats;
-    })
+    });
   }
 
   public openDialog(): void {
@@ -54,21 +54,14 @@ export class ChatComponent implements OnInit {
 
     dialog.afterClosed()
       .pipe(take(1))
-      .subscribe((chat: { chatName: string, chatImage: string }) => {
+      .subscribe((chat: { chatName: string, chatImage: string, chatType: string, selectedUserName: string }) => {
         if(chat?.chatName) {
-          this.chatService.createNewChat(chat.chatName, chat.chatImage);
+          this.chatService.createNewChat(chat.chatName, chat.chatImage, chat.chatType, chat.selectedUserName);
         }
       });
   }
 
   public deleteChat(chat: Chat, type: string) {
-    type === this.chatType.Private ?
-      this.chatService.deletePrivateChat(chat.id, chat.selectedUserId) :
-      this.chatService.deleteChat(chat.id);
-
-  }
-
-  public createNewPrivateChat({id, userName}:{id: string; userName: string}) {
-    this.chatService.createNewPrivateChat({id, userName});
+    this.chatService.deleteChat(chat.id);
   }
 }

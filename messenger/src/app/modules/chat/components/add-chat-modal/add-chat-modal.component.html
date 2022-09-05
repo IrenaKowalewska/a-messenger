@@ -6,13 +6,32 @@
 </div>
 <form [formGroup]="form">
   <mat-form-field class="chat-field" appearance="fill">
-    <input class="name-input" matInput placeholder="Enter chat name" formControlName="chatName">
+    <input
+      class="name-input"
+      matInput
+      placeholder="Enter chat name"
+      formControlName="chatName"
+      [readonly]="form.get('chatType')?.value !== 'All'"
+    >
     <mat-error
       class="mat-error"
       *ngIf="form.get('chatName')?.hasError('required')"
     >
       Chat name is required
     </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Chat type</mat-label>
+    <mat-select
+      formControlName="chatType"
+      (selectionChange)="change($event)"
+    >
+      <mat-option
+        *ngFor="let option of possibleValues" [value]="option.key">
+        {{option.value}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 
   <div class="form__img-wrapper">

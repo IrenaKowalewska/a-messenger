@@ -8,7 +8,6 @@
   padding: 0px 29px 0 10px;
   min-height: 50px;
   border-bottom: 1px solid  $chat-item-border;
-  cursor: pointer;
   transition: all 0.6s;
   -webkit-box-shadow: 3px 2px 5px 1px $box-shadow;
   -moz-box-shadow: 3px 2px 5px 1px $box-shadow;
@@ -47,7 +46,7 @@
 }
 
 .chats-link {
-  height: 21px;
+  min-height: 24px;
   text-decoration: none;
   font-size: 20px;
   font-weight: 700;
@@ -57,6 +56,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: all 0.6s;
+  cursor: pointer;
   @media (max-width: $md) {
     font-size: 16px;
   }
@@ -76,9 +76,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: all 0.6s;
-}
-
-.chat-text {
-  display: flex;
-  flex-direction: column;
 }
