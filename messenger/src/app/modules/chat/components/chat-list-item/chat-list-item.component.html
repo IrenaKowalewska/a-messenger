@@ -18,12 +18,9 @@
       delete_outline
     </mat-icon>
   </button>
-  <a class="chats-link" [routerLink]="['/chats', chat.id]" [ngSwitch]="chat.chatType">
-    <span *ngSwitchCase="'All'">{{chat.name}}</span>
-    <span *ngSwitchDefault>
-      <ng-container *ngIf="chat.authorId === userId; else user">{{chat.selectedUserName}}</ng-container>
-      <ng-template #user>{{chat.name}}</ng-template>
-    </span>
+  <a class="chats-link" [routerLink]="['/chats', chat.id]">
+    <span>{{chat.name | formatChatName: chat: false: userId}}</span>
+
     <span class="last-message">{{chat.lastMessage}}</span>
   </a>
 </li>

@@ -26,7 +26,6 @@ export class AvatarComponent implements OnInit {
     }
 
     public onImageLoadError(): void {
-      console.log(this.photo)
         this.photo = '';
     }
 

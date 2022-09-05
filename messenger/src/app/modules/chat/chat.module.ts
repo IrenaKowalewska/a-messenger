@@ -15,6 +15,7 @@ import { ChatListItemComponent } from './components/chat-list-item/chat-list-ite
 import { ChatUsersListComponent } from './components/chat-users-list/chat-users-list.component';
 import {ChatsResolver} from "./resolvers/chats.resolver";
 import {AvatarModule} from "../../shared/avatar/avatar.module";
+import {PipesModule} from "../../shared/pipes/pipes.module";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: ChatComponent, resolve: {chats: ChatsResolver}},
@@ -40,7 +41,8 @@ const routes: Routes = [
     MaterialModule,
     SpinnerModule,
     AvatarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ]
 })
 export class ChatModule { }
