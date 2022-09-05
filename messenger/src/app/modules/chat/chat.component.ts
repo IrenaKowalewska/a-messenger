@@ -8,6 +8,7 @@ import {AddChatModalComponent} from "./components/add-chat-modal/add-chat-modal.
 import {take} from "rxjs";
 import {UsersService} from "../../core/services/users.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {isEqual} from 'lodash';
 
 export enum ChatType {
   Private = 'private',
@@ -45,6 +46,9 @@ export class ChatComponent implements OnInit {
     });
 
     this.chatService.chats.subscribe((chats: Chat[]) => {
+      if(isEqual(chats, this.chats)) {
+        return;
+      }
       this.chats = chats;
     });
   }

@@ -11,7 +11,6 @@ export class ChatListItemComponent implements OnInit {
   @Input() userId!: string | undefined;
   @Input() link!: string;
   @Output() onDeleteChat = new EventEmitter<Chat>();
-  public pref = 'data:image/jpeg;base64,';
   public isUser!: boolean;
   public isSelectedUser!: boolean;
   public photoUserFirstName!: string;

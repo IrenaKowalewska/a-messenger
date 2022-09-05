@@ -12,9 +12,11 @@ export class AvatarComponent implements OnInit {
     @Input() userId: string | null | undefined;
     @Input() isCircle = false;
     @Input() photo?: string;
+    @Input() isBase64?: boolean;
 
     public selectedColor?: String;
     public initials?: string = '';
+    public pref = 'data:image/jpeg;base64,';
 
     constructor(private avatarColourService: AvatarColourService) {}
 
@@ -24,6 +26,7 @@ export class AvatarComponent implements OnInit {
     }
 
     public onImageLoadError(): void {
+      console.log(this.photo)
         this.photo = '';
     }
 
