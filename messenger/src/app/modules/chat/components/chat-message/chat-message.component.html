@@ -1,4 +1,12 @@
 <li class="chat-message" [ngClass]="{ 'chat-right': isUser, 'chat-left': !isUser }">
+  <button class="delete-button"
+          *ngIf="userId === message.authorId"
+          (click)="onDeleteMessage.emit(message.id)"
+  >
+    <mat-icon class="delete-icon">
+      delete_outline
+    </mat-icon>
+  </button>
   <div class="chat-avatar">
     <avatar
       [firstName]="message.author.split(' ')[0]"
@@ -7,7 +15,6 @@
       [isCircle]="true"
       [photo]="message.authorPhoto"
     ></avatar>
-<!--    <img class="avatar-img" [src]="message.authorPhoto" (error)="errorHandler($event)">-->
     <div class="chat-name">{{ message.author }}</div>
     <div class="chat-hour">{{ message.timestamp | date:'short' }}</div>
   </div>

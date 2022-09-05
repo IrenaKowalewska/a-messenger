@@ -1,4 +1,7 @@
-<div class="chats">
+<button class="open-close-chat" (click)="isChatsOpen = !isChatsOpen">
+  <mat-icon>list</mat-icon>
+</button>
+<div class="chats" [ngClass]="{'chats-open': isChatsOpen}">
   <app-chats-list
     *ngIf="chats"
     [chats]="chats"
@@ -10,7 +13,10 @@
   ></app-chats-list>
 </div>
 <div class="chat-room" *ngIf="isSelectedChat; else welcome">
-  <app-chat-room></app-chat-room>
+  <app-chat-room
+    (isOpenChat)="isChatsOpen = false"
+    (deleteMessage)="deleteMessage($event)"
+  ></app-chat-room>
 </div>
 
 <ng-template #welcome>

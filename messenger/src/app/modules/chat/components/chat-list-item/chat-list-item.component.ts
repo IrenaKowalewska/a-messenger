@@ -22,10 +22,11 @@ export class ChatListItemComponent implements OnInit {
   this.isUser = this.userId === this.chat.authorId;
   this.isSelectedUser = this.userId === this.chat.selectedUserId;
   this.photoUserFirstName =
-    this.isUser ? this.chat.selectedUserName?.split(' ')[0] : this.chat.name?.split(' ')[0];
+    this.chat.chatType === 'All' ? this.chat.name?.split(' ')[0]
+      : this.isUser ? this.chat.selectedUserName?.split(' ')[0] : this.chat.name?.split(' ')[0];
 
   this.photoUserLastName =
-    this.isUser ? this.chat.selectedUserName?.split(' ')[1] : this.chat.name?.split(' ')[1];
+    this.chat.chatType === 'All' ? this.chat.name?.split(' ')[1]
+      : this.isUser ? this.chat.selectedUserName?.split(' ')[1] : this.chat.name?.split(' ')[1];
   }
-
 }

@@ -24,6 +24,7 @@ export class ChatComponent implements OnInit {
   public chatType = ChatType;
   public isSelectedChat = false;
   public chats!: Chat[];
+  public isChatsOpen = false;
 
   constructor(
     public chatService: ChatService,
@@ -46,9 +47,6 @@ export class ChatComponent implements OnInit {
     });
 
     this.chatService.chats.subscribe((chats: Chat[]) => {
-      if(isEqual(chats, this.chats)) {
-        return;
-      }
       this.chats = chats;
     });
   }
@@ -67,5 +65,9 @@ export class ChatComponent implements OnInit {
 
   public deleteChat(chat: Chat, type: string) {
     this.chatService.deleteChat(chat.id);
+  }
+
+  public deleteMessage({id, lastMessage}: {id: string, lastMessage: string}) {
+    this.chatService.deleteMessage(id, lastMessage);
   }
 }

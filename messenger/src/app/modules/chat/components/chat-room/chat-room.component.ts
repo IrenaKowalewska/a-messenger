@@ -2,9 +2,9 @@ import {
   AfterContentChecked, AfterViewChecked,
   AfterViewInit, ChangeDetectorRef,
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   QueryList,
   ViewChild,
   ViewChildren
@@ -21,6 +21,8 @@ import {User, UsersService} from "../../../../core/services/users.service";
   styleUrls: ['./chat-room.component.scss']
 })
 export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Output() isOpenChat = new EventEmitter<void>();
+  @Output() deleteMessage = new EventEmitter<{id: string, lastMessage: string}>();
   public messages!: ChatMessage[];
   public messageText = '';
   public user!: User | null;
@@ -48,6 +50,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
       if(params['id']) {
         this.chatService.chatId.next(params['id']);
         this.isSelectedChat = true;
+        this.isOpenChat.emit();
       }
     });
 
@@ -131,6 +134,13 @@ export class ChatRoomComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public onEnter() {
     this.sendMessage();
+  }
+
+
+  public onDeleteChat(id: string) {
+    let lastMessage = this.messages[this.messages.length - 1];
+    lastMessage = lastMessage.id === id ? this.messages[this.messages.length - 2] : lastMessage;
+    this.deleteMessage.emit({id, lastMessage: lastMessage?.message || ''})
   }
 
 }

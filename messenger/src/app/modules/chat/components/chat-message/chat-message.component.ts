@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ChatMessage} from "../../../../core/services/chat.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Chat, ChatMessage} from "../../../../core/services/chat.service";
 
 @Component({
   selector: 'app-chat-message',
@@ -9,6 +9,8 @@ import {ChatMessage} from "../../../../core/services/chat.service";
 export class ChatMessageComponent implements OnInit {
   @Input() message!: ChatMessage;
   @Input() isUser!: boolean;
+  @Input() userId!: string | undefined;
+  @Output() onDeleteMessage = new EventEmitter<string>();
 
   constructor() { }
 
@@ -18,5 +20,4 @@ export class ChatMessageComponent implements OnInit {
   public errorHandler(event: any) {
     event.target.src = 'assets/images/avatar.png';
   }
-
 }

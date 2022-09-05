@@ -7,6 +7,8 @@
       *ngFor="let message of messages; trackBy:trackBy "
       [message]="message"
       [isUser]="user?.userId === message.authorId"
+      [userId]="user?.userId"
+      (onDeleteMessage)="onDeleteChat($event)"
       #chatItem
     ></app-chat-message>
   </ul>

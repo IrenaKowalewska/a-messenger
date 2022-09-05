@@ -10,6 +10,7 @@ export interface ChatMessage {
   authorPhoto: string;
   authorId: string;
   timestamp: string;
+  chatId: string;
 }
 
 export interface Chat {
@@ -53,7 +54,7 @@ export class ChatService {
 
   public sendMessage(messageText: string, user: User | null) {
     const chatId = this.chatId.getValue();
-    const newMessage = this.createMessage(messageText, user);
+    const newMessage = this.createMessage(messageText, user, chatId);
     this.db.collection(`chats/${chatId}/messages`).doc(newMessage.id).set(newMessage);
     this.db.collection(`chats`).doc(chatId).update({lastMessage: newMessage.message});
   }
@@ -78,12 +79,25 @@ export class ChatService {
   public deleteChat(id: string) {
     this.db.collection(`chats`).doc(id).delete();
   }
+  public deleteMessage(id: string, lastMessage: string) {
+    const chatId = this.chatId.getValue();
+    this.db.collection(`chats`)
+      .doc(chatId)
+      .collection('messages')
+      .doc(id)
+      .delete();
 
-  private createMessage(messageText: string, user: User | null) {
+    this.db.collection(`chats`)
+      .doc(chatId)
+      .update({lastMessage});
+  }
+
+  private createMessage(messageText: string, user: User | null, chatId: string) {
     const id = this.db.createId();
     return {
       message: messageText,
-      id: id,
+      id,
+      chatId,
       author: user?.displayName,
       authorPhoto: user?.userPhoto,
       authorId: user?.userId,

@@ -12,11 +12,31 @@
 .chats {
   width: 30%;
   height: 100%;
+  @media (max-width: $md) {
+    width: 40%;
+  }
+  @media (max-width: $smd) {
+    position: absolute;
+    width: 100%;
+    background: $white;
+    z-index: 2;
+    top: 0;
+    left: -100%;
+    &.chats-open {
+      left: 0;
+    }
+  }
 }
 
 .chat-room {
   width: 70%;
   height: 100%;
+  @media (max-width: $md) {
+    width: 60%;
+  }
+  @media (max-width: $smd) {
+    width: 100%;
+  }
 }
 
 .welcome-chat-room {
@@ -27,8 +47,22 @@
   width: 70%;
   height: 100%;
   font-size: 30px;
+  text-shadow: 1px 1px $main-text-color;
   @media(max-width: $md) {
     font-size: 20px;
   }
+  @media (max-width: $smd) {
+    width: 100%;
+  }
 }
 
+.open-close-chat {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  z-index: 3;
+  display: none;
+  @media (max-width: $smd) {
+    display: block;
+  }
+}
