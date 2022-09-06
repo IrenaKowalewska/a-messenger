@@ -10,6 +10,7 @@ export class ChatListItemComponent implements OnInit {
   @Input() chat!: Chat;
   @Input() userId!: string | undefined;
   @Input() link!: string;
+  @Input() isSelectedChat!: boolean;
   @Output() onDeleteChat = new EventEmitter<Chat>();
   public isUser!: boolean;
   public isSelectedUser!: boolean;

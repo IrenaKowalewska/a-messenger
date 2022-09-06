@@ -1,5 +1,14 @@
 <button class="open-close-chat" (click)="isChatsOpen = !isChatsOpen">
-  <mat-icon>list</mat-icon>
+  <mat-icon
+    *ngIf="!isChatsOpen"
+    matTooltip="Open chats list"
+    matTooltipPosition="left"
+  > list_alt</mat-icon>
+  <mat-icon
+    *ngIf="isChatsOpen"
+    matTooltipPosition="left"
+    matTooltip="Close chats list">
+    close</mat-icon>
 </button>
 <div class="chats" [ngClass]="{'chats-open': isChatsOpen}">
   <app-chats-list
@@ -8,6 +17,7 @@
     [userId]="userService.userInfo$.getValue()?.userId"
     [link]="'chat'"
     [isPrivateList]="false"
+    [selectedChat]="selectedChat"
     (onDeleteChat)="deleteChat($event, chatType.Group)"
     (onOpenDialog)="openDialog()"
   ></app-chats-list>

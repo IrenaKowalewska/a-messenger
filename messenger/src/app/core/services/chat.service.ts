@@ -2,6 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, switchMap} from "rxjs";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {User, UsersService} from "./users.service";
+import {ChatType} from "../../modules/chat/chat.component";
 
 export interface ChatMessage {
   message: string;
@@ -20,7 +21,7 @@ export interface Chat {
   selectedUserId?: string;
   lastMessage: string;
   image: string;
-  chatType: string;
+  chatType: ChatType;
   selectedUserName: string;
 }
 
@@ -45,7 +46,7 @@ export class ChatService {
     this.selectedChatMessages = this.chatId.pipe(
       switchMap((id: string) => {
         return this.db.collection<ChatMessage>(`chats/${id}/messages`, ref => {
-          return ref.orderBy('timestamp', 'asc').limit(100);
+          return ref.orderBy('timestamp', 'asc');
         }).valueChanges();
       })
     );
@@ -61,7 +62,7 @@ export class ChatService {
 
   public createNewChat(name: string, image: string, chatType: string, selectedUserName: string) {
     const id = this.db.createId();
-    const chatName = chatType === 'All' ? name : this.userService.userInfo$.getValue()?.displayName;
+    const chatName = chatType === ChatType.Group ? name : this.userService.userInfo$.getValue()?.displayName;
     this.db.collection(`chats`).doc(id).set(
       {
         id: id,

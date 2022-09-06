@@ -15,10 +15,20 @@ import { ChatListItemComponent } from './components/chat-list-item/chat-list-ite
 import {ChatsResolver} from "./resolvers/chats.resolver";
 import {AvatarModule} from "../../shared/avatar/avatar.module";
 import {PipesModule} from "../../shared/pipes/pipes.module";
+import {SelectedChatResolver} from "./resolvers/selected-chat.resolver";
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', component: ChatComponent, resolve: {chats: ChatsResolver}},
-  {path: ':id', component: ChatComponent, resolve: {chats: ChatsResolver}},
+  {
+    path: '',
+    pathMatch: 'full',
+    component: ChatComponent,
+    resolve: {chats: ChatsResolver}
+  },
+  {
+    path: ':id',
+    component: ChatComponent,
+    resolve: {chats: ChatsResolver, selectedChat: SelectedChatResolver}
+  },
 ];
 
 @NgModule({

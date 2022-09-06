@@ -3,20 +3,39 @@
   matTooltip="Add new chat"
   (click)="onOpenDialog.emit()"
 >+</button>
-<ul class="chats-wrapper">
+<div class="chats-block">
+  <ul class="chat-tabs">
+    <li
+      class="chat-tab"
+      (click)="chatType = chatTypes.Group"
+      [ngClass]="{selected: chatType === chatTypes.Group}">
+      <span class="tab-icon">
+        <mat-icon> chat_bubble_outline</mat-icon>
+      </span>
+      <span class="tab-text">All chats</span>
+    </li>
+    <li class="chat-tab"
+        (click)="chatType = chatTypes.Private"
+        [ngClass]="{selected: chatType === chatTypes.Private}">
+     <span class="tab-icon">
+        <mat-icon> person_pin</mat-icon>
+     </span>
+      <span class="tab-text">Personal</span>
+    </li>
+  </ul>
+  <ul class="chats-wrapper">
     <ng-container *ngIf="chats.length ; else emptyChatList">
       <app-chat-list-item
-        *ngFor="let chat of chats; trackBy:trackBy"
+        *ngFor="let chat of chats | filterChats: chatType: userId; trackBy:trackBy"
         [chat]="chat"
         [link]="link"
         [userId]="userId"
+        [isSelectedChat]="chat.id === selectedChat?.id"
         (onDeleteChat)="deleteChat($event)"
       ></app-chat-list-item>
     </ng-container>
     <ng-template #emptyChatList>
-      <ng-container [ngSwitch]="isPrivateList">
-        <li *ngSwitchCase="true" class="chats-item private">Select user to start chat</li>
-        <li *ngSwitchDefault (click)="this.onOpenDialog.emit();" class="chats-item">Start your first chat</li>
-      </ng-container>
+      <li (click)="this.onOpenDialog.emit();" class="chats-item">Start your first chat</li>
     </ng-template>
-</ul>
+  </ul>
+</div>

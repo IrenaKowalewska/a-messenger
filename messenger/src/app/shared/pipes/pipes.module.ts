@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormatChatNamePipe } from './format-chat-name.pipe';
+import { FilterChatsPipe } from './filter-chats.pipe';
 
 
 
 @NgModule({
   declarations: [
-    FormatChatNamePipe
+    FormatChatNamePipe,
+    FilterChatsPipe
   ],
-  exports: [
-    FormatChatNamePipe
-  ],
+    exports: [
+        FormatChatNamePipe,
+        FilterChatsPipe
+    ],
   imports: [
     CommonModule
   ]

@@ -37,9 +37,6 @@ export class ChatRoomComponent implements AfterViewInit{
   public isPrivateChat = false;
   public isSelectedChat = false;
 
-  constructor() { }
-
-
   ngAfterViewInit() {
     this.scrollContainer = this.scrollFrame.nativeElement;
     this.itemElements.changes.pipe().subscribe(_ => this.onItemElementsChanged());

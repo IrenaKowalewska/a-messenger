@@ -10,8 +10,8 @@ import {User, UsersService} from "../../core/services/users.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 
 export enum ChatType {
-  Private = 'private',
-  Group = 'group'
+  Group = 'All',
+  Private = 'Private'
 }
 
 @Component({

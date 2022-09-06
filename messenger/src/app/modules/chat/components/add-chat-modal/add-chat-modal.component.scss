@@ -38,14 +38,8 @@
   background: none;
 }
 
-::ng-deep .mat-form-field-underline {
-  /*change color of underline*/
-  background-color: $border-color !important;
-}
-
 ::ng-deep .mat-form-field-ripple {
-  /*change color of underline when focused*/
-  background-color: $border-color !important;
+  background-color: $button-hover !important;
 }
 
 ::ng-deep .mat-form-field-subscript-wrapper {
@@ -69,24 +63,22 @@
   width: 100%;
   padding: 10px 0;
   border: 1px dashed $border-color;
+  transition: all 0.4s;
+  &:hover {
+    border-color: $button-hover;
+    &:hover > * {
+      transition: all 0.4s;
+      color: $button-hover;
+    }
+  }
 }
 .form-group__file-label:hover {
   cursor: pointer;
 }
 
 .form-group__file-btn {
-  position: relative;
   color: $border-color;
-  padding-left: 29px;
   text-align: center;
-  &:before {
-    content: "+";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 24px;
-    height: 24px;
-  }
 }
 
 .form-group__file-input {

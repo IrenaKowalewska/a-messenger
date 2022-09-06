@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User, UsersService} from "../../../../core/services/users.service";
+import {ChatType} from "../../chat.component";
 
 interface AddChatForm {
   chatName: FormControl;
@@ -26,7 +27,7 @@ export class AddChatModalComponent implements OnInit {
     this.form = new FormGroup<AddChatForm>({
       chatName: new FormControl('', Validators.required),
       chatImage: new FormControl(''),
-      chatType: new FormControl('All'),
+      chatType: new FormControl(ChatType.Group),
     });
 
     this.usersService.users.subscribe(users => {
@@ -39,11 +40,13 @@ export class AddChatModalComponent implements OnInit {
   public createNewChat() {
     if(!this.form.controls['chatName'].value) return;
     const user = this.possibleValues.find(user => user.key === this.form.controls['chatType'].value);
+    const chatType = this.form.controls['chatType'].value === ChatType.Group ? ChatType.Group : ChatType.Private;
     this.dialogRef.close({
       chatName: this.form.controls['chatName'].value,
       chatImage: this.form.controls['chatImage'].value,
-      chatType: this.form.controls['chatType'].value,
-      selectedUserName: user?.value
+      chatType,
+      selectedUserName: user?.value || '',
+      selectedUserId: user?.key || ''
     });
   }
 
@@ -73,7 +76,7 @@ export class AddChatModalComponent implements OnInit {
   }
 
   public change(event: any) {
-    if(event.value !== 'All') {
+    if(event.value !== ChatType.Private) {
       const user = this.possibleValues.find(user => user.key === event.value);
       this.form.controls['chatName'].setValue(`Chat with ${user?.value}`);
     }

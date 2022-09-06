@@ -9,9 +9,11 @@
 }
 
 .chat-info {
+  display: flex;
+  align-items: center;
   min-height: 35px;
   padding: 7px;
-  font-size: 20px;
+  font-size: 16px;
   -webkit-box-shadow: 3px 2px 5px 1px $box-shadow;
   -moz-box-shadow: 3px 2px 5px 1px $box-shadow;
   box-shadow: 3px 2px 5px 1px $box-shadow;
@@ -46,8 +48,18 @@
 
 .emoji-mart-block {
   position: absolute;
-  bottom: 67px;
+  bottom: 45px;
   right: 0;
+}
+
+::ng-deep .emoji-mart {
+  @media (max-width: $md) {
+    width: 248px !important;
+  }
+}
+
+::ng-deep .emoji-mart-preview {
+  display: none;
 }
 
 .send-wrapper {

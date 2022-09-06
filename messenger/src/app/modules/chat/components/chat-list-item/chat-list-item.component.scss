@@ -6,12 +6,9 @@
   align-items: center;
   position: relative;
   padding: 0px 29px 0 10px;
-  min-height: 50px;
+  min-height: 55px;
   border-bottom: 1px solid  $chat-item-border;
   transition: all 0.6s;
-  -webkit-box-shadow: 3px 2px 5px 1px $box-shadow;
-  -moz-box-shadow: 3px 2px 5px 1px $box-shadow;
-  box-shadow: 3px 2px 5px 1px $box-shadow;
   &:hover {
     background-color: $list-item-hover;
     border-bottom: 1px solid  $button-hover;
@@ -21,6 +18,15 @@
     }
     .last-message {
       color: $white;
+    }
+  }
+  &.selected {
+    &.selected {
+      background: $list-item-selected;
+      border-bottom: 1px solid $list-item-hover;
+      &:hover {
+        background-color: $list-item-hover;
+      }
     }
   }
 }
@@ -36,6 +42,8 @@
   color: $main-text-color;
   &:hover {
     color: $red;
+    background: $white;
+    border-radius: 5px;
   }
 }
 
@@ -46,9 +54,8 @@
 }
 
 .chats-link {
-  min-height: 24px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: $header-bg;
   width: 100%;
@@ -69,7 +76,7 @@
 .last-message {
   display: block;
   color: $chat-user-name;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   width: 100%;
   overflow: hidden;

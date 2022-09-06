@@ -7,12 +7,13 @@ $button-bg: #333C83;
 $button-hover: #F24A72;
 $border-color: #5D8BF4;
 $white: #ffffff;
-$chat-item-border: #051367;
+$chat-item-border: rgba(5, 19,103, 0.4);
 $chat-bg: #DFF6FF;
 $red: #d32f2f;
 $chat-user-name: #999999;
 $box-shadow: rgba(5, 19,103, 0.56);
-$list-item-hover: rgba(242, 74,114, .7);
+$list-item-hover: #F24A72;
+$list-item-selected: rgba(242, 74,114, 0.1);
 
 $xl: 1440px;
 $xlg: 1280px;
