@@ -4,7 +4,7 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import {Chat} from "../../../core/services/chat.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 
