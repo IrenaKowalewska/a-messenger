@@ -1,4 +1,4 @@
-<li class="chats-item" [ngClass]="{selected: isSelectedChat}">
+<li class="chats-item" [ngClass]="{selected: isSelectedChat}" (click)="openChat(chat.id)">
   <avatar
     class="avatar"
     [firstName]="photoUserFirstName"
@@ -22,9 +22,9 @@
   >
     <mat-icon class="edit-icon">edit</mat-icon>
   </button>
-  <a class="chats-link" [routerLink]="['/chats', chat.id]">
+  <div class="chats-link">
     <span class="chat-name">{{chat.name | formatChatName: chat: false: userId}}</span>
     <span class="last-message" *ngIf="chat.lastMessage.length">{{chat.lastMessage}}</span>
-  </a>
+  </div>
 </li>
 

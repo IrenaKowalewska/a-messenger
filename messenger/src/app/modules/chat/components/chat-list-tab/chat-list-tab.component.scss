@@ -1,0 +1,33 @@
+@import 'src/styles/variables';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chat-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 55px;
+  padding: 5px 0;
+  border-bottom: 1px solid  transparent;
+  cursor: pointer;
+  transition: all 0.4s;
+  &:hover {
+    background-color: $list-item-hover;
+    border-bottom: 1px solid  $button-hover;
+    box-shadow: 0 2px 5px 1px rgb(242 74 114 / 56%);
+    & > * {
+      transition: all 0.4s;
+      color: $white;
+    }
+  }
+  &.selected {
+    color: $button-hover;
+    &:hover {
+      background-color: $list-item-hover;
+    }
+  }
+}

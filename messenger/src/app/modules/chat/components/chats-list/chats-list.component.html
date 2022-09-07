@@ -5,23 +5,11 @@
 >+</button>
 <div class="chats-block">
   <ul class="chat-tabs">
-    <li
-      class="chat-tab"
-      (click)="chatType = chatTypes.Group"
-      [ngClass]="{selected: chatType === chatTypes.Group}">
-      <span class="tab-icon">
-        <mat-icon> chat_bubble_outline</mat-icon>
-      </span>
-      <span class="tab-text">All chats</span>
-    </li>
-    <li class="chat-tab"
-        (click)="chatType = chatTypes.Private"
-        [ngClass]="{selected: chatType === chatTypes.Private}">
-     <span class="tab-icon">
-        <mat-icon> person_pin</mat-icon>
-     </span>
-      <span class="tab-text">Personal</span>
-    </li>
+    <app-chat-list-tab
+      *ngFor="let tab of chatTabsConfig"
+      [chatTab]="tab"
+      (onSelectedType)="onSelectedTab($event)"
+    ></app-chat-list-tab>
   </ul>
   <ul class="chats-wrapper">
     <ng-container *ngIf="chats.length ; else emptyChatList">

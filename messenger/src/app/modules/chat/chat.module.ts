@@ -16,6 +16,8 @@ import {ChatsResolver} from "./resolvers/chats.resolver";
 import {AvatarModule} from "../../shared/avatar/avatar.module";
 import {PipesModule} from "../../shared/pipes/pipes.module";
 import {SelectedChatResolver} from "./resolvers/selected-chat.resolver";
+import { ChatMessageInputComponent } from './components/chat-message-input/chat-message-input.component';
+import { ChatListTabComponent } from './components/chat-list-tab/chat-list-tab.component';
 
 const routes: Routes = [
   {
@@ -39,6 +41,8 @@ const routes: Routes = [
     AddChatModalComponent,
     ChatsListComponent,
     ChatListItemComponent,
+    ChatMessageInputComponent,
+    ChatListTabComponent,
   ],
   imports: [
     CommonModule,

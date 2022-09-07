@@ -14,22 +14,8 @@
     ></app-chat-message>
   </ul>
 
-  <div class="send-wrapper">
-    <input
-      class="input"
-      type="text"
-      (keydown.enter)="sendMessage()"
-      [(ngModel)]="messageText"
-      #input
-      placeholder="Type your message here...">
-    <emoji-mart
-      class="emoji-mart-block"
-      *ngIf="showEmojiPicker"
-      set="apple"
-      (emojiClick)="addEmoji($event)"
-    ></emoji-mart>
-    <button class="open-emoji-button" (click)="showEmojiPicker = !showEmojiPicker">😀</button>
-    <button class="send-button" (click)="sendMessage()">
-      <img src="../../../../../assets/images/Vector.png" alt="send">
-    </button>
-  </div>
+  <app-chat-message-input
+    [messageText]="messageText"
+    (onSendMessage)="sendMessage($event)"
+  ></app-chat-message-input>
+</div>

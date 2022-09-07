@@ -30,13 +30,9 @@ export class ChatRoomComponent implements AfterViewInit {
   @Output() onEditMessage = new EventEmitter<{message:ChatMessage; lastMessage: string}>();
   public messageText = '';
   @ViewChild('scrollframe', {static: false}) scrollFrame!: ElementRef;
-  @ViewChild('input', {static: false}) input!: ElementRef;
   @ViewChildren('chatItem') itemElements!: QueryList<any>;
   private scrollContainer: any;
   private isNearBottom = true;
-  public showEmojiPicker = false;
-  public isPrivateChat = false;
-  public isSelectedChat = false;
   public isEdit = false;
   public editedMessage!: ChatMessage;
 
@@ -51,7 +47,7 @@ export class ChatRoomComponent implements AfterViewInit {
     }
   }
 
-  trackBy(index: number, item: ChatMessage) {
+  trackBy(index: number, item: ChatMessage): string {
     return item.id;
   }
 
@@ -74,48 +70,34 @@ export class ChatRoomComponent implements AfterViewInit {
     this.isNearBottom = this.isUserNearBottom();
   }
 
-  addEmoji(event:any) {
-    const emoji: string = (event.emoji as any).native;
-    const input = this.input.nativeElement;
-    input.focus();
-
-    if (document.execCommand){
-
-      const e = new Event('input');
-      document.execCommand('insertText', false, emoji);
-      return;
-    }
-    const [start, end] = [input.selectionStart, input.selectionEnd];
-    input.setRangeText(emoji, start, end, 'end');
-  }
-
-  public sendMessage() {
-    if(!this.messageText.length) return;
+  public sendMessage(messageText: string) {
+    if(!messageText.length) return;
     if(this.isEdit) {
+      if(messageText === this.editedMessage.message) {
+        this.messageText = '';
+        this.isEdit = false;
+        return;
+      }
       const newMessage = {
         ...this.editedMessage,
-        message: this.messageText
+        message: messageText
       };
       let lastMessage = this.messages[this.messages.length - 1];
       lastMessage = lastMessage.id === this.editedMessage.id ? newMessage : this.messages[this.messages.length - 1];
-
       this.onEditMessage.emit({message: newMessage, lastMessage: lastMessage.message});
       this.isEdit = false;
     } else {
-      this.onSendMessage.emit(this.messageText)
+      this.onSendMessage.emit(messageText);
     }
-
-    this.showEmojiPicker = false;
-    this.messageText = '';
   }
 
-  public onDeleteMessage(id: string) {
+  public onDeleteMessage(id: string): void {
     let lastMessage = this.messages[this.messages.length - 1];
     lastMessage = lastMessage.id === id ? this.messages[this.messages.length - 2] : lastMessage;
     this.deleteMessage.emit({id, lastMessage: lastMessage?.message || ''})
   }
 
-  public editMessage(message: ChatMessage) {
+  public editMessage(message: ChatMessage): void {
     this.isEdit = true;
     this.messageText = message.message;
     this.editedMessage = message;

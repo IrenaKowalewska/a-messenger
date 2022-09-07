@@ -4,6 +4,7 @@ import {AddChatModalComponent} from "../add-chat-modal/add-chat-modal.component"
 import {take} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {AddChatModalData, ChatType} from "../../chat.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-chat-list-item',
@@ -24,7 +25,7 @@ export class ChatListItemComponent implements OnInit, OnChanges {
   public chatPhoto: string | undefined = '';
   public isBase64Photo!: boolean;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,12 +35,12 @@ export class ChatListItemComponent implements OnInit, OnChanges {
       this.isAuthor = this.userId === this.chat.authorId;
       this.isSelectedUser = this.userId === this.chat.selectedUserId;
       this.photoUserFirstName =
-        this.chat.chatType === ChatType.Group ? this.chat.name?.split(' ')[0]
-          : this.isAuthor ? this.chat.selectedUserName?.split(' ')[0] : this.chat.name?.split(' ')[0];
+        this.chat.chatType === ChatType.Group ? this.getWord(this.chat.name, 0)
+          : this.isAuthor ? this.getWord(this.chat.selectedUserName, 0) : this.getWord(this.chat.name, 0);
 
       this.photoUserLastName =
-        this.chat.chatType === ChatType.Group ? this.chat.name?.split(' ')[1]
-          : this.isAuthor ? this.chat.selectedUserName?.split(' ')[1] : this.chat.name?.split(' ')[1];
+        this.chat.chatType === ChatType.Group ? this.getWord(this.chat.name, 1)
+          : this.isAuthor ? this.getWord(this.chat.selectedUserName, 1) : this.getWord(this.chat.name, 1);
 
       this.chatPhoto = this.chat.chatType === ChatType.Group ? this.chat.image
         : this.isAuthor ? this.chat.selectedUserPhoto : this.chat.authorPhoto;
@@ -63,5 +64,13 @@ export class ChatListItemComponent implements OnInit, OnChanges {
           this.onEditChat.emit(newChat);
         }
       });
+  }
+
+  private getWord(text: string, index: number) {
+    return text?.split(' ')[index]
+  }
+
+  public openChat(id: string) {
+    this.router.navigate(['/chats', id])
   }
 }
