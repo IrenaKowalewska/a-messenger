@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   templateUrl: './chat-list-item.component.html',
   styleUrls: ['./chat-list-item.component.scss']
 })
-export class ChatListItemComponent implements OnInit, OnChanges {
+export class ChatListItemComponent implements OnChanges {
   @Input() chat!: Chat;
   @Input() userId!: string | undefined;
   @Input() link!: string;
@@ -26,9 +26,6 @@ export class ChatListItemComponent implements OnInit, OnChanges {
   public isBase64Photo!: boolean;
 
   constructor(public dialog: MatDialog, private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes['chat']) {
@@ -49,7 +46,7 @@ export class ChatListItemComponent implements OnInit, OnChanges {
     }
   }
 
-  public editChat(chat: Chat) {
+  public editChat(chat: Chat): void {
     const dialog = this.dialog.open(AddChatModalComponent, {
       data: {
         isEdit: true,
@@ -66,11 +63,11 @@ export class ChatListItemComponent implements OnInit, OnChanges {
       });
   }
 
-  private getWord(text: string, index: number) {
+  private getWord(text: string, index: number): string {
     return text?.split(' ')[index]
   }
 
-  public openChat(id: string) {
-    this.router.navigate(['/chats', id])
+  public openChat(id: string): void {
+    this.router.navigate(['/chats', id]);
   }
 }

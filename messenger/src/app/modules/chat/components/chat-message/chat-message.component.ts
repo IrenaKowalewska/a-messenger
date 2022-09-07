@@ -18,7 +18,7 @@ export class ChatMessageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public errorHandler(event: any) {
+  public errorHandler(event: any): void {
     event.target.src = 'assets/images/avatar.png';
   }
 }

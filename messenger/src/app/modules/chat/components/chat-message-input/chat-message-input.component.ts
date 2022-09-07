@@ -5,16 +5,11 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
   templateUrl: './chat-message-input.component.html',
   styleUrls: ['./chat-message-input.component.scss']
 })
-export class ChatMessageInputComponent implements OnInit {
+export class ChatMessageInputComponent {
   @Input() messageText = '';
   @ViewChild('input', {static: false}) input!: ElementRef;
   @Output() onSendMessage = new EventEmitter<string>();
   public showEmojiPicker = false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public sendMessage(): void {
     this.onSendMessage.emit(this.messageText);
@@ -22,7 +17,7 @@ export class ChatMessageInputComponent implements OnInit {
     this.messageText = '';
   }
 
-  addEmoji(event:any) {
+  addEmoji(event:any): void {
     const emoji: string = (event.emoji as any).native;
     const input = this.input.nativeElement;
     input.focus();

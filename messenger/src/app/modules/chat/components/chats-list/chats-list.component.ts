@@ -29,10 +29,9 @@ export class ChatsListComponent implements OnInit {
   @Output() onEditChat = new EventEmitter<AddChatModalData>();
   @Output() onOpenDialog = new EventEmitter<void>();
   public chatTabsConfig: ChatTab[] = CHAT_TABS_CONFIG;
-  public chatTypes = ChatType;
   public chatType!: ChatType;
 
-  constructor(private route: ActivatedRoute,) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.data.pipe(take(1)).subscribe((data: any) => {

@@ -28,13 +28,13 @@ export class ChatRoomComponent implements AfterViewInit {
   @Output() deleteMessage = new EventEmitter<{id: string, lastMessage: string}>();
   @Output() onSendMessage = new EventEmitter<string>();
   @Output() onEditMessage = new EventEmitter<{message:ChatMessage; lastMessage: string}>();
-  public messageText = '';
   @ViewChild('scrollframe', {static: false}) scrollFrame!: ElementRef;
   @ViewChildren('chatItem') itemElements!: QueryList<any>;
   private scrollContainer: any;
   private isNearBottom = true;
   public isEdit = false;
   public editedMessage!: ChatMessage;
+  public messageText = '';
 
   ngAfterViewInit() {
     this.scrollContainer = this.scrollFrame.nativeElement;
@@ -55,7 +55,6 @@ export class ChatRoomComponent implements AfterViewInit {
     this.scrollContainer.scroll({
       top: this.scrollContainer.scrollHeight,
       left: 0,
-      // behavior: 'smooth'
     });
   }
 
@@ -70,7 +69,7 @@ export class ChatRoomComponent implements AfterViewInit {
     this.isNearBottom = this.isUserNearBottom();
   }
 
-  public sendMessage(messageText: string) {
+  public sendMessage(messageText: string): void {
     if(!messageText.length) return;
     if(this.isEdit) {
       if(messageText === this.editedMessage.message) {

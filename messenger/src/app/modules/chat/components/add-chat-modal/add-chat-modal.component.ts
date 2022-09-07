@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User, UsersService} from "../../../../core/services/users.service";
-import {ChatType} from "../../chat.component";
+import {AddChatModalData, ChatType} from "../../chat.component";
 import {Chat} from "../../../../core/services/chat.service";
 
 interface AddChatForm {
@@ -48,7 +48,7 @@ export class AddChatModalComponent implements OnInit {
     });
   }
 
-  public createNewChat() {
+  public createNewChat(): void {
     if(!this.form.controls['chatName'].value) return;
     const user = this.users.find(user => user.userId === this.form.controls['chatType'].value);
     const chatType = this.form.controls['chatType'].value === ChatType.Group ? ChatType.Group : ChatType.Private;
@@ -56,7 +56,7 @@ export class AddChatModalComponent implements OnInit {
     this.dialogRef.close(chatData);
   }
 
-  public async changeImgInput(event: Event) {
+  public async changeImgInput(event: Event): Promise<void> {
     const target = event.target as HTMLInputElement;
     const reader = new FileReader();
     if (target.files) {
@@ -72,7 +72,6 @@ export class AddChatModalComponent implements OnInit {
         } else {
           this.addPhotoText = 'Please upload photo less than 1048kb';
         }
-
       });
     }
   }
@@ -81,7 +80,7 @@ export class AddChatModalComponent implements OnInit {
     this.form.controls['chatImage'].setValue('');
   }
 
-  public change(event: any) {
+  public change(event: any): void {
     if(event.value !== ChatType.Private) {
       const user = this.possibleValues.find(user => user.key === event.value);
       this.form.controls['chatName'].setValue(`Chat with ${user?.value}`);
@@ -91,7 +90,7 @@ export class AddChatModalComponent implements OnInit {
     });
   }
 
-  private createNewChatData(user: User | undefined, chatType: string) {
+  private createNewChatData(user: User | undefined, chatType: string): AddChatModalData {
     return {
       chatName: this.form.controls['chatName'].value,
       chatImage: this.form.controls['chatImage'].value,
