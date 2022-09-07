@@ -3,6 +3,7 @@
   <div class="user-block">
     <div class="user" *ngIf="user?.displayName">
       <avatar
+        class="avatar"
         [firstName]="user?.displayName.split(' ')[0]"
         [lastName]="user?.displayName.split(' ')[1]"
         [userId]="user?.uid"

@@ -2,6 +2,8 @@
 @import '~@ctrl/ngx-emoji-mart/picker';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import 'src/styles/variables';
+@import "src/styles/material/material-global";
+@import "src/styles/emoji-mart";
 
 *,
 *::after,

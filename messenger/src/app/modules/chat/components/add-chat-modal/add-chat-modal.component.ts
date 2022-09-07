@@ -1,13 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User, UsersService} from "../../../../core/services/users.service";
 import {ChatType} from "../../chat.component";
+import {Chat} from "../../../../core/services/chat.service";
 
 interface AddChatForm {
   chatName: FormControl;
   chatImage: FormControl;
   chatType: FormControl;
+}
+
+interface DialogData {
+  isEdit: boolean;
+  chat?: Chat;
 }
 
 @Component({
@@ -19,35 +25,35 @@ export class AddChatModalComponent implements OnInit {
   public form!: FormGroup;
   public pref = 'data:image/jpeg;base64,'
   public addPhotoText = 'Add cover';
+  public chatTypes = ChatType;
   public possibleValues: {key: string; value: string}[] = [{key: 'All', value: 'All'}];
+  public users: User[] = [];
 
-  constructor(public dialogRef: MatDialogRef<AddChatModalComponent>, private usersService: UsersService) { }
+  constructor(
+    public dialogRef: MatDialogRef<AddChatModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup<AddChatForm>({
-      chatName: new FormControl('', Validators.required),
-      chatImage: new FormControl(''),
-      chatType: new FormControl(ChatType.Group),
+      chatName: new FormControl(this.data.chat?.name || '', Validators.required),
+      chatImage: new FormControl(this.data.chat?.image || ''),
+      chatType: new FormControl(this.data.chat?.chatType || ChatType.Group),
     });
 
     this.usersService.users.subscribe(users => {
       const selectValues = users.map((user: User) => ({key: user.userId, value: user.displayName}));
       this.possibleValues = [...this.possibleValues, ...selectValues];
-
-    })
+      this.users = users;
+    });
   }
 
   public createNewChat() {
     if(!this.form.controls['chatName'].value) return;
-    const user = this.possibleValues.find(user => user.key === this.form.controls['chatType'].value);
+    const user = this.users.find(user => user.userId === this.form.controls['chatType'].value);
     const chatType = this.form.controls['chatType'].value === ChatType.Group ? ChatType.Group : ChatType.Private;
-    this.dialogRef.close({
-      chatName: this.form.controls['chatName'].value,
-      chatImage: this.form.controls['chatImage'].value,
-      chatType,
-      selectedUserName: user?.value || '',
-      selectedUserId: user?.key || ''
-    });
+    const chatData = this.createNewChatData(user, chatType);
+    this.dialogRef.close(chatData);
   }
 
   public async changeImgInput(event: Event) {
@@ -83,5 +89,19 @@ export class AddChatModalComponent implements OnInit {
     this.form.patchValue({
       chatType: event.value,
     });
+  }
+
+  private createNewChatData(user: User | undefined, chatType: string) {
+    return {
+      chatName: this.form.controls['chatName'].value,
+      chatImage: this.form.controls['chatImage'].value,
+      chatType,
+      selectedUserName: user?.displayName || '',
+      selectedUserId: user?.userId || '',
+      selectedUserPhoto: user?.userPhoto || '',
+      id: this.data.chat?.id || '',
+      authorId: this.data.chat?.authorId || '',
+      lastMessage: this.data.chat?.lastMessage || ''
+    }
   }
 }

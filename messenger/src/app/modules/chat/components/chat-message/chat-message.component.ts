@@ -11,6 +11,7 @@ export class ChatMessageComponent implements OnInit {
   @Input() isUser!: boolean;
   @Input() userId!: string | undefined;
   @Output() onDeleteMessage = new EventEmitter<string>();
+  @Output() onEditMessage = new EventEmitter<ChatMessage>();
 
   constructor() { }
 

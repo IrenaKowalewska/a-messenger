@@ -7,6 +7,13 @@
       delete_outline
     </mat-icon>
   </button>
+
+  <button class="edit-button"
+          *ngIf="isUser"
+          (click)="onEditMessage.emit(message)"
+  >
+    <mat-icon class="edit-icon">edit</mat-icon>
+  </button>
   <div class="chat-avatar">
     <avatar
       [firstName]="message.author.split(' ')[0]"
@@ -20,5 +27,6 @@
   </div>
   <div class="chat-text">
     {{ message.message }}
+    <small *ngIf="message.edited">(edited)</small>
   </div>
 </li>

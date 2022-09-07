@@ -21,24 +21,30 @@
     }
   }
   &.selected {
-    &.selected {
-      background: $list-item-selected;
-      border-bottom: 1px solid $list-item-hover;
-      &:hover {
-        background-color: $list-item-hover;
-      }
+    & > * {
+      color: $button-hover;
+    }
+    &:hover {
+      background-color: $list-item-hover;
     }
   }
 }
 
-.delete-button {
+.delete-button,
+.edit-button {
   position: absolute;
   display: none;
-  right: 0;
+  right: -5px;
+  top: 0;
   background: none;
 }
 
-.delete-icon {
+.edit-button {
+  right: 20px;
+  top: 0
+}
+
+.delete-icon, .edit-icon {
   color: $main-text-color;
   &:hover {
     color: $red;
@@ -48,7 +54,8 @@
 }
 
 .chats-item:hover {
-  .delete-button {
+  .delete-button,
+  .edit-button {
     display: block;
   }
 }
@@ -73,8 +80,23 @@
   }
 }
 
+.avatar {
+  margin-right: 5px;
+}
+
+.chat-name {
+  height: 17px;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .last-message {
   display: block;
+  padding-top: 3px;
+  height: 16px;
   color: $chat-user-name;
   font-size: 12px;
   font-weight: 400;

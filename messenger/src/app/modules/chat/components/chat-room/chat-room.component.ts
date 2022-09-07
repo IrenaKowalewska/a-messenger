@@ -20,13 +20,14 @@ import {User, UsersService} from "../../../../core/services/users.service";
   templateUrl: './chat-room.component.html',
   styleUrls: ['./chat-room.component.scss']
 })
-export class ChatRoomComponent implements AfterViewInit{
+export class ChatRoomComponent implements AfterViewInit {
   @Input() selectedChat!: Chat | null;
   @Input() messages!: ChatMessage[];
   @Input() user!: User | null;
   @Output() isOpenChat = new EventEmitter<void>();
   @Output() deleteMessage = new EventEmitter<{id: string, lastMessage: string}>();
   @Output() onSendMessage = new EventEmitter<string>();
+  @Output() onEditMessage = new EventEmitter<{message:ChatMessage; lastMessage: string}>();
   public messageText = '';
   @ViewChild('scrollframe', {static: false}) scrollFrame!: ElementRef;
   @ViewChild('input', {static: false}) input!: ElementRef;
@@ -36,6 +37,8 @@ export class ChatRoomComponent implements AfterViewInit{
   public showEmojiPicker = false;
   public isPrivateChat = false;
   public isSelectedChat = false;
+  public isEdit = false;
+  public editedMessage!: ChatMessage;
 
   ngAfterViewInit() {
     this.scrollContainer = this.scrollFrame.nativeElement;
@@ -88,20 +91,33 @@ export class ChatRoomComponent implements AfterViewInit{
 
   public sendMessage() {
     if(!this.messageText.length) return;
+    if(this.isEdit) {
+      const newMessage = {
+        ...this.editedMessage,
+        message: this.messageText
+      };
+      let lastMessage = this.messages[this.messages.length - 1];
+      lastMessage = lastMessage.id === this.editedMessage.id ? newMessage : this.messages[this.messages.length - 1];
+
+      this.onEditMessage.emit({message: newMessage, lastMessage: lastMessage.message});
+      this.isEdit = false;
+    } else {
+      this.onSendMessage.emit(this.messageText)
+    }
+
     this.showEmojiPicker = false;
-    this.onSendMessage.emit(this.messageText)
     this.messageText = '';
   }
 
-  public onEnter() {
-    this.sendMessage();
-  }
-
-
-  public onDeleteChat(id: string) {
+  public onDeleteMessage(id: string) {
     let lastMessage = this.messages[this.messages.length - 1];
     lastMessage = lastMessage.id === id ? this.messages[this.messages.length - 2] : lastMessage;
     this.deleteMessage.emit({id, lastMessage: lastMessage?.message || ''})
   }
 
+  public editMessage(message: ChatMessage) {
+    this.isEdit = true;
+    this.messageText = message.message;
+    this.editedMessage = message;
+  }
 }

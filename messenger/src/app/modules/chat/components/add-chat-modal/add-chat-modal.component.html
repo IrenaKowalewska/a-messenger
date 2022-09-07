@@ -2,10 +2,12 @@
   <button mat-button class="close-icon" [mat-dialog-close]="true">
     <mat-icon>close</mat-icon>
   </button>
-  <h2 mat-dialog-title>Add Chat</h2>
+  <h2 mat-dialog-title class="title">{{data.isEdit ? 'Edit' : 'Add'}} Chat</h2>
 </div>
 <form [formGroup]="form">
-  <mat-form-field class="chat-field" appearance="fill">
+  <mat-form-field
+    class="chat-field" appearance="fill"
+    *ngIf="!data.isEdit || (data.isEdit && data.chat?.chatType === chatTypes.Group)">
     <input
       class="name-input"
       matInput
@@ -21,7 +23,7 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" *ngIf="!data.isEdit">
     <mat-label>Chat type</mat-label>
     <mat-select
       formControlName="chatType"
@@ -34,7 +36,7 @@
     </mat-select>
   </mat-form-field>
 
-  <div class="form__img-wrapper">
+  <div class="form__img-wrapper" *ngIf="form.get('chatType')?.value === 'All'">
     <ng-container *ngIf="form.get('chatImage')?.value; else formImgInput">
       <div class="form__img">
         <button type="button" class="delete-img-btn" (click)="removeImg()">X</button>
@@ -61,4 +63,4 @@
 <button
   class="add-chat-button"
   (click)="createNewChat()" [disabled]="form.invalid"
->Add new Chat</button>
+>{{data.isEdit ? 'Edit' : 'Add'}}</button>

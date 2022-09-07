@@ -1,8 +1,8 @@
 import {Injectable, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable, switchMap} from "rxjs";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {BehaviorSubject, Observable, switchMap, tap} from "rxjs";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {User, UsersService} from "./users.service";
-import {ChatType} from "../../modules/chat/chat.component";
+import {AddChatModalData, ChatType} from "../../modules/chat/chat.component";
 
 export interface ChatMessage {
   message: string;
@@ -12,6 +12,7 @@ export interface ChatMessage {
   authorId: string;
   timestamp: string;
   chatId: string;
+  edited?: boolean;
 }
 
 export interface Chat {
@@ -20,9 +21,12 @@ export interface Chat {
   authorId?: string;
   selectedUserId?: string;
   lastMessage: string;
+  lastMessageId?: string;
   image: string;
   chatType: ChatType;
   selectedUserName: string;
+  selectedUserPhoto?: string;
+  authorPhoto?: string;
 }
 
 @Injectable({
@@ -60,29 +64,52 @@ export class ChatService {
     this.db.collection(`chats`).doc(chatId).update({lastMessage: newMessage.message});
   }
 
-  public createNewChat(name: string, image: string, chatType: string, selectedUserName: string) {
+  public updateMessage(message: ChatMessage, lastMessage: string) {
+    const chatId = this.chatId.getValue();
+    this.db.collection(`chats/${chatId}/messages`).doc(message.id).update({
+      edited: true,
+      message: message.message
+    });
+    this.db.collection(`chats`).doc(chatId).update({lastMessage: lastMessage});
+  }
+
+  public createNewChat(chat: AddChatModalData) {
     const id = this.db.createId();
-    const chatName = chatType === ChatType.Group ? name : this.userService.userInfo$.getValue()?.displayName;
+    const chatName = chat.chatType === ChatType.Group ? chat.chatName : this.userService.userInfo$.getValue()?.displayName;
     this.db.collection(`chats`).doc(id).set(
       {
         id: id,
         name: chatName,
         authorId: this.currentUser?.userId,
+        authorPhoto: this.currentUser?.userPhoto || '',
         lastMessage: '',
-        image,
-        chatType,
-        selectedUserId: chatType,
-        selectedUserName
+        image: chat.chatImage,
+        chatType: chat.chatType,
+        selectedUserId: chat.selectedUserId,
+        selectedUserName: chat.selectedUserName,
+        selectedUserPhoto: chat.selectedUserPhoto
       },
     );
   }
 
   public deleteChat(id: string) {
-    this.db.collection(`chats`).doc(id).delete();
+    this.db.collection('chats').doc(id).delete();
   }
+
+  public updateChat(chat: AddChatModalData) {
+    this.db.collection('chats').doc(chat.id).update({
+      id: chat.id,
+      name: chat.chatName,
+      authorId: chat.authorId,
+      lastMessage: chat.lastMessage,
+      image: chat.chatImage,
+      chatType: chat.chatType,
+    });
+  }
+
   public deleteMessage(id: string, lastMessage: string) {
     const chatId = this.chatId.getValue();
-    this.db.collection(`chats`)
+    this.db.collection('chats')
       .doc(chatId)
       .collection('messages')
       .doc(id)

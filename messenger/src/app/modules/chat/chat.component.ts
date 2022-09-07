@@ -14,6 +14,18 @@ export enum ChatType {
   Private = 'Private'
 }
 
+export interface AddChatModalData {
+  chatName: string;
+  chatImage: string;
+  chatType: string;
+  selectedUserName: string;
+  selectedUserId: string;
+  id?: string;
+  authorId?: string;
+  lastMessage?: string;
+  selectedUserPhoto?: string;
+}
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -82,18 +94,22 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(): void {
-    const dialog = this.dialog.open(AddChatModalComponent);
+    const dialog = this.dialog.open(AddChatModalComponent, {
+      data: {
+        isEdit: false,
+      }
+    });
 
     dialog.afterClosed()
       .pipe(take(1))
-      .subscribe((chat: { chatName: string, chatImage: string, chatType: string, selectedUserName: string }) => {
-        if(chat?.chatName) {
-          this.chatService.createNewChat(chat.chatName, chat.chatImage, chat.chatType, chat.selectedUserName);
+      .subscribe((newChat: AddChatModalData) => {
+        if(newChat?.chatName) {
+          this.chatService.createNewChat(newChat);
         }
       });
   }
 
-  public deleteChat(chat: Chat, type: string) {
+  public deleteChat(chat: Chat) {
     this.chatService.deleteChat(chat.id);
   }
 
@@ -103,5 +119,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   public sendMessage(text: string) {
     this.chatService.sendMessage(text);
+  }
+
+  public editChat(newChatData: AddChatModalData) {
+    this.chatService.updateChat(newChatData);
+  }
+
+  public editMessage({message, lastMessage}: {message:ChatMessage; lastMessage: string}) {
+    this.chatService.updateMessage(message, lastMessage);
   }
 }

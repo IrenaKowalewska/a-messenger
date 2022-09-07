@@ -17,7 +17,8 @@
       width: 87%;
     }
     &:hover {
-      .delete-button {
+      .delete-button,
+      .edit-button{
         display: block;
       }
     }
@@ -105,13 +106,19 @@
   }
 }
 
-.delete-button {
+.delete-button,
+.edit-button {
   position: absolute;
   background: none;
   display: none;
 }
 
-.delete-icon {
+.edit-button {
+  right: 30px;
+}
+
+.delete-icon,
+.edit-icon {
   color: $main-text-color;
   &:hover {
     color: $red;
@@ -168,6 +175,11 @@
   .chat-message .chat-text {
     font-size: .8rem;
     margin-left: 15px;
+  }
+
+  .edit-button {
+    left: 30px;
+    right: unset;
   }
 
 }

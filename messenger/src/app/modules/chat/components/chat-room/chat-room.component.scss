@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   min-height: 35px;
-  padding: 7px;
+  padding: 7px 35px 7px 7px;
   font-size: 16px;
   -webkit-box-shadow: 3px 2px 5px 1px $box-shadow;
   -moz-box-shadow: 3px 2px 5px 1px $box-shadow;
@@ -30,7 +30,7 @@
 }
 
 .chat-title {
-  margin-left: 10px;
+  word-break: break-word;
 }
 
 .welcome-title {
@@ -50,16 +50,6 @@
   position: absolute;
   bottom: 45px;
   right: 0;
-}
-
-::ng-deep .emoji-mart {
-  @media (max-width: $md) {
-    width: 248px !important;
-  }
-}
-
-::ng-deep .emoji-mart-preview {
-  display: none;
 }
 
 .send-wrapper {

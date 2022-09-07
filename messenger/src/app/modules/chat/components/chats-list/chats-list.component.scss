@@ -42,7 +42,7 @@
     }
   }
   &.selected {
-    background: $list-item-selected;
+    color: $button-hover;
     &:hover {
       background-color: $list-item-hover;
     }

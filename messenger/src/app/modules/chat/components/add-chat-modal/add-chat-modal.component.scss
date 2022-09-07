@@ -3,7 +3,19 @@
 :host {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  min-width: 300px;
+  @media (max-width: $md) {
+    min-width: 200px;
+  }
+
+  @media (max-width: $sm) {
+    min-width: 180px;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .add-chat-button {
@@ -11,6 +23,7 @@
   padding: 5px;
   font-size: 18px;
   margin-top: 15px;
+  text-transform: uppercase;
 }
 
 .add-chat-button:disabled {
@@ -32,18 +45,6 @@
 
 .mat-dialog-title {
   text-align: center;
-}
-
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-  background: none;
-}
-
-::ng-deep .mat-form-field-ripple {
-  background-color: $button-hover !important;
-}
-
-::ng-deep .mat-form-field-subscript-wrapper {
-  margin-top: 3px;
 }
 
 .mat-form-field {

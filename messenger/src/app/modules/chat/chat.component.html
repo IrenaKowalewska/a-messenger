@@ -18,7 +18,8 @@
     [link]="'chat'"
     [isPrivateList]="false"
     [selectedChat]="selectedChat"
-    (onDeleteChat)="deleteChat($event, chatType.Group)"
+    (onDeleteChat)="deleteChat($event)"
+    (onEditChat)="editChat($event)"
     (onOpenDialog)="openDialog()"
   ></app-chats-list>
 </div>
@@ -30,6 +31,7 @@
     (isOpenChat)="isChatsOpen = false"
     (deleteMessage)="deleteMessage($event)"
     (onSendMessage)="sendMessage($event)"
+    (onEditMessage)="editMessage($event)"
   ></app-chat-room>
 </div>
 

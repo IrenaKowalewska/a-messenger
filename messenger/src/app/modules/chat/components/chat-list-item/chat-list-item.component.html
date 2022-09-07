@@ -1,24 +1,30 @@
-<a class="chats-link" [routerLink]="['/chats', chat.id]">
-  <li class="chats-item" [ngClass]="{selected: isSelectedChat}">
-    <avatar
-      [firstName]="photoUserFirstName"
-      [lastName]="photoUserLastName"
-      [userId]="chat.id"
-      [isCircle]="true"
-      [photo]="chat.image"
-      [isBase64]="true"
-    ></avatar>
-    <button class="delete-button"
-            *ngIf="userId === chat.authorId"
-            (click)="onDeleteChat.emit(chat)"
-    >
-      <mat-icon class="delete-icon">
-        delete_outline
-      </mat-icon>
-    </button>
-    <div>
-      <span>{{chat.name | formatChatName: chat: false: userId}}</span>
-      <span class="last-message" *ngIf="chat.lastMessage.length">{{chat.lastMessage}}</span>
-    </div>
-  </li>
-</a>
+<li class="chats-item" [ngClass]="{selected: isSelectedChat}">
+  <avatar
+    class="avatar"
+    [firstName]="photoUserFirstName"
+    [lastName]="photoUserLastName"
+    [userId]="chat.id"
+    [isCircle]="true"
+    [photo]="chatPhoto"
+    [isBase64]="isBase64Photo"
+  ></avatar>
+  <button class="delete-button"
+          *ngIf="userId === chat.authorId"
+          (click)="onDeleteChat.emit(chat)"
+  >
+    <mat-icon class="delete-icon">
+      delete_outline
+    </mat-icon>
+  </button>
+  <button class="edit-button"
+          *ngIf="userId === chat.authorId && chat.chatType === 'All'"
+          (click)="editChat(chat)"
+  >
+    <mat-icon class="edit-icon">edit</mat-icon>
+  </button>
+  <a class="chats-link" [routerLink]="['/chats', chat.id]">
+    <span class="chat-name">{{chat.name | formatChatName: chat: false: userId}}</span>
+    <span class="last-message" *ngIf="chat.lastMessage.length">{{chat.lastMessage}}</span>
+  </a>
+</li>
+

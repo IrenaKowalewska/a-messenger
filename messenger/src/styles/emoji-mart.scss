@@ -1,0 +1,11 @@
+@import "variables";
+
+.emoji-mart {
+  @media (max-width: $md) {
+    width: 248px !important;
+  }
+}
+
+.emoji-mart-preview {
+  display: none;
+}
