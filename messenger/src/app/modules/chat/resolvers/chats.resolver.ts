@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable} from 'rxjs';
-import {Chat} from "../../../core/services/chat.service";
+import {Chat} from "../../../shared/services/chat.service";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Injectable({

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {User, UsersService} from "../../../../core/services/users.service";
+import {User, UsersService} from "../../../../shared/services/users.service";
 import {AddChatModalData, ChatType} from "../../chat.component";
-import {Chat} from "../../../../core/services/chat.service";
+import {Chat} from "../../../../shared/services/chat.service";
 
 interface AddChatForm {
   chatName: FormControl;

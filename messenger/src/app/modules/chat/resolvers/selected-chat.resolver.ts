@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {Chat} from "../../../core/services/chat.service";
+import {Chat} from "../../../shared/services/chat.service";
 
 @Injectable({
   providedIn: 'root'

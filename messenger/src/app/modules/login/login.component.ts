@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../core/services/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {ChatService} from "../../core/services/chat.service";
-import {User, UsersService} from "../../core/services/users.service";
+import {ChatService} from "../../shared/services/chat.service";
+import {User, UsersService} from "../../shared/services/users.service";
 import {take} from "rxjs";
 
 @Component({

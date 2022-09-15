@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Chat} from "../../../../core/services/chat.service";
+import {Chat} from "../../../../shared/services/chat.service";
 import {AddChatModalComponent} from "../add-chat-modal/add-chat-modal.component";
 import {take} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";

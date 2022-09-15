@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Chat} from "../../core/services/chat.service";
+import {Chat} from "../services/chat.service";
 import {ChatType} from "../../modules/chat/chat.component";
 
 @Pipe({

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from "../../../core/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 import {Subject, takeUntil} from "rxjs";
-import {ChatService} from "../../../core/services/chat.service";
-import {UsersService} from "../../../core/services/users.service";
+import {ChatService} from "../../../shared/services/chat.service";
+import {UsersService} from "../../../shared/services/users.service";
 
 @Component({
   selector: 'app-header',

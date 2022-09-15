@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Chat} from "../../../../core/services/chat.service";
+import {Chat} from "../../../../shared/services/chat.service";
 import {AddChatModalData, ChatType} from "../../chat.component";
 import {take} from "rxjs";
 import {ActivatedRoute} from "@angular/router";

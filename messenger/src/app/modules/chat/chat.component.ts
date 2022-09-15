@@ -1,12 +1,12 @@
 import {
   Component, OnDestroy, OnInit,
 } from '@angular/core';
-import {AuthService} from "../../core/services/auth.service";
-import {Chat, ChatMessage, ChatService} from "../../core/services/chat.service";
+import {AuthService} from "../../shared/services/auth.service";
+import {Chat, ChatMessage, ChatService} from "../../shared/services/chat.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AddChatModalComponent} from "./components/add-chat-modal/add-chat-modal.component";
 import {Subject, take, takeUntil} from "rxjs";
-import {User, UsersService} from "../../core/services/users.service";
+import {User, UsersService} from "../../shared/services/users.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 
 export enum ChatType {

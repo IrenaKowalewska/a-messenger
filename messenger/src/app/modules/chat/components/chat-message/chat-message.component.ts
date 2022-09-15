@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Chat, ChatMessage} from "../../../../core/services/chat.service";
+import {Chat, ChatMessage} from "../../../../shared/services/chat.service";
 
 @Component({
   selector: 'app-chat-message',
