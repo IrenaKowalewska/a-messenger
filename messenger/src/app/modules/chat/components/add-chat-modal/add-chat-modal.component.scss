@@ -1,0 +1,123 @@
+@import 'src/styles/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  @media (max-width: $md) {
+    min-width: 200px;
+  }
+
+  @media (max-width: $sm) {
+    min-width: 180px;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.add-chat-button {
+  color: $white;
+  padding: 5px;
+  font-size: 18px;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+
+.add-chat-button:disabled {
+  cursor: no-drop;
+  background: $border-color;
+}
+
+.dialog-header {
+  position: relative;
+}
+
+.close-icon {
+  background-color: transparent;
+  width: fit-content;
+  position: absolute;
+  right: 0;
+  color: $main-text-color;
+}
+
+.mat-dialog-title {
+  text-align: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+.form-title-field {
+  margin-top: 52px;
+}
+
+.form-group__cover {
+  width: 100%;
+}
+
+.form-group__file-label {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  border: 1px dashed $border-color;
+  transition: all 0.4s;
+  &:hover {
+    border-color: $button-hover;
+    &:hover > * {
+      transition: all 0.4s;
+      color: $button-hover;
+    }
+  }
+}
+.form-group__file-label:hover {
+  cursor: pointer;
+}
+
+.form-group__file-btn {
+  color: $border-color;
+  text-align: center;
+}
+
+.form-group__file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.form__img-wrapper {
+  position: relative;
+}
+
+.form__img {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+
+  &-added {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 95%;
+  }
+}
+.delete-img-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 24%;
+  color: $white;
+  border: 1px solid $white;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  &:hover {
+    background-color: $red;
+  }
+}

@@ -1,0 +1,105 @@
+@import 'src/styles/variables';
+
+.chats-item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0px 29px 0 10px;
+  min-height: 55px;
+  border-bottom: 1px solid  $chat-item-border;
+  transition: all 0.6s;
+  &:hover {
+    background-color: $list-item-hover;
+    border-bottom: 1px solid  $button-hover;
+    box-shadow: 3px 2px 5px 1px rgb(242 74 114 / 56%);
+    .chats-link {
+      color: $white;
+    }
+    .last-message {
+      color: $white;
+    }
+  }
+  &.selected {
+    & > * {
+      color: $button-hover;
+    }
+    &:hover {
+      background-color: $list-item-hover;
+    }
+  }
+}
+
+.delete-button,
+.edit-button {
+  position: absolute;
+  display: none;
+  right: 0;
+  top: 0;
+  background: none;
+}
+
+.edit-button {
+  right: 25px;
+  top: 0
+}
+
+.delete-icon, .edit-icon {
+  color: $main-text-color;
+  &:hover {
+    color: $red;
+    background: $white;
+    border-radius: 5px;
+  }
+}
+
+.chats-item:hover {
+  .delete-button,
+  .edit-button {
+    display: block;
+  }
+}
+
+.chats-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: $header-bg;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.6s;
+  cursor: pointer;
+  @media (max-width: $md) {
+    font-size: 16px;
+  }
+  @media (max-width: $sm) {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.avatar {
+  margin-right: 5px;
+}
+
+.chat-name {
+  height: 17px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.last-message {
+  color: $chat-user-name;
+  font-size: 12px;
+  font-weight: 400;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.6s;
+}

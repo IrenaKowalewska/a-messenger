@@ -1,0 +1,66 @@
+<div class="dialog-header">
+  <button mat-button class="close-icon" [mat-dialog-close]="true">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h2 mat-dialog-title class="title">{{data.isEdit ? 'Edit' : 'Add'}} Chat</h2>
+</div>
+<form [formGroup]="form">
+  <mat-form-field
+    class="chat-field" appearance="fill"
+    *ngIf="!data.isEdit || (data.isEdit && data.chat?.chatType === chatTypes.Group)">
+    <input
+      class="name-input"
+      matInput
+      placeholder="Enter chat name"
+      formControlName="chatName"
+      [readonly]="form.get('chatType')?.value !== 'All'"
+    >
+    <mat-error
+      class="mat-error"
+      *ngIf="form.get('chatName')?.hasError('required')"
+    >
+      Chat name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" *ngIf="!data.isEdit">
+    <mat-label>Chat type</mat-label>
+    <mat-select
+      formControlName="chatType"
+      (selectionChange)="change($event)"
+    >
+      <mat-option
+        *ngFor="let option of possibleValues" [value]="option.key">
+        {{option.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="form__img-wrapper" *ngIf="form.get('chatType')?.value === 'All'">
+    <ng-container *ngIf="form.get('chatImage')?.value; else formImgInput">
+      <div class="form__img">
+        <button type="button" class="delete-img-btn" (click)="removeImg()">X</button>
+        <img class="form__img-added" [src]="pref+form.get('chatImage')?.value" alt="post img">
+      </div>
+    </ng-container>
+
+    <ng-template #formImgInput>
+      <div class="form-group__cover">
+        <label class="form-group__file-label">
+          <span class="form-group__file-btn">{{addPhotoText}}</span>
+          <input
+            (change)="changeImgInput($event)"
+            class="form-group__file-input"
+            type="file"
+            name="image"
+            accept="image/*"
+          >
+        </label>
+      </div>
+    </ng-template>
+  </div>
+</form>
+<button
+  class="add-chat-button"
+  (click)="createNewChat()" [disabled]="form.invalid"
+>{{data.isEdit ? 'Edit' : 'Add'}}</button>

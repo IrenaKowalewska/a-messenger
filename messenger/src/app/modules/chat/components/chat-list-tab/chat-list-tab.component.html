@@ -1,0 +1,9 @@
+<li class="chat-tab"
+    (click)="onSelectedType.emit(chatTab.chatType)"
+    [ngClass]="{selected: chatTab.isSelected}">
+     <span class="tab-icon">
+        <mat-icon  *ngIf="chatTab.chatType === chatTypes.Private"> person_pin</mat-icon>
+        <mat-icon  *ngIf="chatTab.chatType === chatTypes.Group"> chat_bubble_outline</mat-icon>
+     </span>
+  <span class="tab-text">{{chatTab.chatType}}</span>
+</li>

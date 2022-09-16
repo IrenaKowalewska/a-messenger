@@ -1,0 +1,25 @@
+.initialAvatar {
+    font-size: 21px;
+    font-weight: bold;
+    background: white;
+    color: white;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    &.circle {
+        border-radius: 50%;
+    }
+    &.with-photo {
+        background-color: transparent !important;
+    }
+
+    .photo {
+        border-radius: inherit;
+        height: 100%;
+        width: 100%;
+    }
+}

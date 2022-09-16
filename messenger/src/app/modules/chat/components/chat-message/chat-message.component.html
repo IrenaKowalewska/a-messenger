@@ -1,0 +1,32 @@
+<li class="chat-message" [ngClass]="{ 'chat-right': isUser, 'chat-left': !isUser }">
+  <button class="delete-button"
+          *ngIf="isUser"
+          (click)="onDeleteMessage.emit(message.id)"
+  >
+    <mat-icon class="delete-icon">
+      delete_outline
+    </mat-icon>
+  </button>
+
+  <button class="edit-button"
+          *ngIf="isUser"
+          (click)="onEditMessage.emit(message)"
+  >
+    <mat-icon class="edit-icon">edit</mat-icon>
+  </button>
+  <div class="chat-avatar">
+    <avatar
+      [firstName]="message.author.split(' ')[0]"
+      [lastName]="message.author.split(' ')[1]"
+      [userId]="message.authorId"
+      [isCircle]="true"
+      [photo]="message.authorPhoto"
+    ></avatar>
+    <div class="chat-name">{{ message.author }}</div>
+    <div class="chat-hour">{{ message.timestamp | date:'short' }}</div>
+  </div>
+  <div class="chat-text">
+    {{ message.message }}
+    <small *ngIf="message.edited">(edited)</small>
+  </div>
+</li>

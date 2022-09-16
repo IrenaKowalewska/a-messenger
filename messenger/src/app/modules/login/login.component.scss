@@ -1,0 +1,78 @@
+@import 'src/styles/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  height: calc(100% - 60px);
+  padding: 15px 160px;
+  background-color: $white;
+  background-image: url("~src/assets/images/chat-main.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  @media (max-width: $xl) {
+    padding: 15px 90px;
+  }
+  @media (max-width: $xlg) {
+    padding: 15px 40px;
+  }
+  @media (max-width: $lg) {
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+
+.wrapper {
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: $white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 10px 2px $box-shadow;
+  -moz-box-shadow: 0px 2px 10px 2px $box-shadow;
+  box-shadow: 0px 2px 10px 2px $box-shadow;
+}
+
+.title {
+  color: $main-text-color;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 50px;
+  span {
+    display: block;
+  }
+}
+
+.subtitle {
+  color: #94a2aa;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 208px;
+  width: 100%;
+  align-items: center;
+  padding: 2px;
+  color: white;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+.btn-icon {
+  width: 41px;
+  height: 41px;
+  background: white;
+  background-image: url('~src/assets/images/google-sso-btn.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  border-radius: 5px;
+}

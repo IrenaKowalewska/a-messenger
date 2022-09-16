@@ -1,0 +1,29 @@
+<button
+  class="add-new-chat-button"
+  matTooltip="Add new chat"
+  (click)="onOpenDialog.emit()"
+>+</button>
+<div class="chats-block">
+  <ul class="chat-tabs">
+    <app-chat-list-tab
+      *ngFor="let tab of chatTabsConfig"
+      [chatTab]="tab"
+      (onSelectedType)="onSelectedTab($event)"
+    ></app-chat-list-tab>
+  </ul>
+  <ul class="chats-wrapper">
+    <ng-container *ngIf="chats.length ; else emptyChatList">
+      <app-chat-list-item
+        *ngFor="let chat of chats | filterChats: chatType: userId"
+        [chat]="chat"
+        [userId]="userId"
+        [isSelectedChat]="chat.id === selectedChat?.id"
+        (onDeleteChat)="deleteChat($event)"
+        (onEditChat)="onEditChat.emit($event)"
+      ></app-chat-list-item>
+    </ng-container>
+    <ng-template #emptyChatList>
+      <li (click)="this.onOpenDialog.emit();" class="chats-item">Start your first chat</li>
+    </ng-template>
+  </ul>
+</div>

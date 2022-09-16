@@ -1,0 +1,35 @@
+@import '../../../../../styles/variables';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.emoji-mart-block {
+  position: absolute;
+  bottom: 45px;
+  right: 0;
+}
+
+
+.input {
+  padding: 15px 58px 15px 15px;
+  width: 100%;
+  background-color: $white;
+  border: none;
+  outline: none;
+}
+
+.send-button {
+  position: absolute;
+  top: 14px;
+  right: 5px;
+  background: none;
+}
+
+.open-emoji-button {
+  position: absolute;
+  top: 13px;
+  right: 34px;
+  background: none;
+}

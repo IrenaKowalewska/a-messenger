@@ -1,0 +1,37 @@
+@import 'src/styles/variables';
+
+:host {
+  display: flex;
+  height: 60px;
+  background: $header-bg;
+}
+
+.logo {
+  font-family: 'Qwitcher Grypen', cursive;
+  color: $body-bg;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.avatar {
+  margin-right: 5px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  color: $white;
+}
+
+.user-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}

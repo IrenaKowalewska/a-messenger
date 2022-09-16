@@ -1,0 +1,30 @@
+<li class="chats-item" [ngClass]="{selected: isSelectedChat}" (click)="openChat(chat.id)">
+  <avatar
+    class="avatar"
+    [firstName]="photoUserFirstName"
+    [lastName]="photoUserLastName"
+    [userId]="chat.id"
+    [isCircle]="true"
+    [photo]="chatPhoto"
+    [isBase64]="isBase64Photo"
+  ></avatar>
+  <button class="delete-button"
+          *ngIf="userId === chat.authorId"
+          (click)="onDeleteChat.emit(chat)"
+  >
+    <mat-icon class="delete-icon">
+      delete_outline
+    </mat-icon>
+  </button>
+  <button class="edit-button"
+          *ngIf="userId === chat.authorId && chat.chatType === 'All'"
+          (click)="editChat(chat)"
+  >
+    <mat-icon class="edit-icon">edit</mat-icon>
+  </button>
+  <div class="chats-link">
+    <span class="chat-name">{{chat.name | formatChatName: chat: false: userId}}</span>
+    <span class="last-message" *ngIf="chat.lastMessage.length">{{chat.lastMessage}}</span>
+  </div>
+</li>
+
