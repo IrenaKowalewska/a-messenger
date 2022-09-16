@@ -40,6 +40,7 @@ export class ChatService {
   public get currentUser() {
     return this.userService.userInfo$.getValue();
   }
+  public selectedChat$ = new BehaviorSubject<Chat | null>(null);
 
   constructor(public db: AngularFirestore, private userService: UsersService) {
     this.selectedChat = this.chatId.pipe(

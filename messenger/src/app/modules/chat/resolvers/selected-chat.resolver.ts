@@ -15,6 +15,8 @@ export class SelectedChatResolver implements Resolve<Chat | undefined> {
   constructor(public db: AngularFirestore) {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Chat | undefined> {
-    return this.db.collection<Chat>('chats').doc(route.params['id']).valueChanges();
+    const urlArray = state.url.split('/');
+    const id = urlArray[urlArray.length - 1];
+    return this.db.collection<Chat>('chats').doc(id).valueChanges();
   }
 }

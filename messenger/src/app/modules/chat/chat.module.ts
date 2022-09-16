@@ -6,7 +6,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import {PickerModule} from "@ctrl/ngx-emoji-mart";
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-import { ChatRoomComponent } from './components/chat-room/chat-room.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
 import {MaterialModule} from "../../shared/material/material.module";
 import { AddChatModalComponent } from './components/add-chat-modal/add-chat-modal.component';
 import {SpinnerModule} from "../../shared/spinner/spinner.module";
@@ -18,18 +18,24 @@ import {PipesModule} from "../../shared/pipes/pipes.module";
 import {SelectedChatResolver} from "./resolvers/selected-chat.resolver";
 import { ChatMessageInputComponent } from './components/chat-message-input/chat-message-input.component';
 import { ChatListTabComponent } from './components/chat-list-tab/chat-list-tab.component';
+import {ChatRoomStartComponent} from "./chat-room-start/chat-room-start.component";
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: ChatComponent,
-    resolve: {chats: ChatsResolver}
-  },
-  {
-    path: ':id',
-    component: ChatComponent,
-    resolve: {chats: ChatsResolver, selectedChat: SelectedChatResolver}
+    resolve: {chats: ChatsResolver, selectedChat: SelectedChatResolver},
+    children: [
+      {
+        path: '',
+        component: ChatRoomStartComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: ':id',
+        component: ChatRoomComponent,
+      },
+    ]
   },
 ];
 

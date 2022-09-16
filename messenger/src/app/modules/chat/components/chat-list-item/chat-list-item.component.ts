@@ -14,7 +14,6 @@ import {Router} from "@angular/router";
 export class ChatListItemComponent implements OnChanges {
   @Input() chat!: Chat;
   @Input() userId!: string | undefined;
-  @Input() link!: string;
   @Input() isSelectedChat!: boolean;
   @Output() onDeleteChat = new EventEmitter<Chat>();
   @Output() onEditChat = new EventEmitter<AddChatModalData>();

@@ -40,24 +40,6 @@
   }
 }
 
-.welcome-chat-room {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: $chat-bg;
-  width: 65%;
-  height: 100%;
-  font-size: 30px;
-  font-weight: 700;
-  @media(max-width: $md) {
-    font-size: 20px;
-    width: 55%;
-  }
-  @media (max-width: $smd) {
-    width: 100%;
-  }
-}
-
 .open-close-chat {
   position: absolute;
   top: 3px;

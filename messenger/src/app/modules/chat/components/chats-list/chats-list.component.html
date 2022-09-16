@@ -16,7 +16,6 @@
       <app-chat-list-item
         *ngFor="let chat of chats | filterChats: chatType: userId"
         [chat]="chat"
-        [link]="link"
         [userId]="userId"
         [isSelectedChat]="chat.id === selectedChat?.id"
         (onDeleteChat)="deleteChat($event)"

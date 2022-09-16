@@ -22,7 +22,6 @@ const CHAT_TABS_CONFIG = [
 export class ChatsListComponent implements OnInit {
   @Input() chats!: any;
   @Input() userId!: string | undefined;
-  @Input() link!: string;
   @Input() isPrivateList!: boolean;
   @Input() selectedChat!: Chat | null | undefined;
   @Output() onDeleteChat = new EventEmitter<Chat>();
